@@ -12,7 +12,7 @@ mycursor = db.cursor()
 # create_person_table_query = "CREATE TABLE Person (name VARCHAR(50), age smallint UNSIGNED, personID int PRIMARY KEY AUTO_INCREMENT)"
 # mycursor.execute(create_person_table_query)
 
-mycursor.execute("DESCRIBE Person")
+mycursor.execute("show tables")
 
 for x in mycursor:
     print(x)
