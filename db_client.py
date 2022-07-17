@@ -7,4 +7,4 @@ db = mysql.connector.connect(
     database="testdatabase"
 )
 
-mycursor = db.cursor()
+cursor = db.cursor()
