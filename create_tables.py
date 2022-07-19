@@ -106,7 +106,7 @@ ddl = [
     );
     ''',
 
-    # (9) referenced by Item, Order
+    # (9) referenced by Item, _Order
     '''
     CREATE TABLE Restaurant (
         restaurant_id INTEGER,
@@ -143,9 +143,9 @@ ddl = [
     );
     ''',
 
-    # (12) referenced by OrderToItem
+    # (12) referenced by OrderToItem (note: Order renamed to _Order because of SQL keyword conflict)
     '''
-    CREATE TABLE Order (
+    CREATE TABLE _Order (
         order_id INTEGER,
         tip FLOAT NOT NULL,
         status INTEGER NOT NULL,
@@ -169,7 +169,7 @@ ddl = [
         restaurant_id INTEGER,
         item_name CHAR(20),
         PRIMARY KEY (order_id, restaurant_id, item_name),
-        FOREIGN KEY (order_id) REFERENCES Order(order_id),
+        FOREIGN KEY (order_id) REFERENCES _Order(order_id),
         FOREIGN KEY (item_name, restaurant_id) REFERENCES Item(item_name, restaurant_id)
     );
     '''
