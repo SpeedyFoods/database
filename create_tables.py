@@ -9,7 +9,6 @@ def delete_all_tables():
     cursor.execute("CREATE DATABASE testdatabase;")
     cursor.execute("use testdatabase;")
 
-
 ddl = [
     create_card_bin_table_query,
     create_restaurant_parent_table_query,
@@ -26,22 +25,23 @@ ddl = [
     create_order_to_item_query,
 ]
 
+if __name__ == "__main__":
 # delete all tables before creating new ones
-delete_all_tables()
+    delete_all_tables()
 
-# insert tables
-for statement in ddl: 
-    cursor.execute(statement)
-    # print(statement)
+    # insert tables
+    for statement in ddl: 
+        cursor.execute(statement)
+        # print(statement)
 
-db.commit()
+    db.commit()
 
-def show_tables():
-    cursor.execute("SHOW tables;")
-    myresult = cursor.fetchall()
-    for x in myresult:
-        print(x)
+    def show_tables():
+        cursor.execute("SHOW tables;")
+        myresult = cursor.fetchall()
+        for x in myresult:
+            print(x)
 
-show_tables()
-db.close()
-print("Successfully created tables")
+    show_tables()
+    db.close()
+    print("Successfully created tables")
