@@ -26,16 +26,18 @@ ddl = [
     # (2) referenced by Restaurant
     '''
     CREATE TABLE RestaurantParent (
-        PRIMARY KEY restaurant_name char(50) NOT NULL,
-        cuisine CHAR(20)
+        restaurant_name CHAR(50) NOT NULL,
+        cuisine CHAR(20),
+        PRIMARY KEY (restaurant_name)
     )
     ''',
 
     # (3) referenced by Zip
     '''
     CREATE TABLE City (
-        city_name CHAR(25) PRIMARY KEY,
-        province_name CHAR(25)
+        city_name CHAR(25),
+        province_name CHAR(25),
+        PRIMARY KEY (city_name)
     );
     ''',
 
@@ -64,26 +66,26 @@ ddl = [
     # (6)
     '''
     CREATE TABLE User_Address (
-        address_id integer,
-        user_id integer, 
+        address_id INTEGER,
+        user_id INTEGER, 
         zip CHAR(6), 
-        building_number integer, 
-        unit_number integer, 
+        building_number INTEGER, 
+        unit_number INTEGER, 
         street_name CHAR(50),
         PRIMARY KEY (address_id),
         FOREIGN KEY (zip) REFERENCES Zip(zip),
-        FOREIGN KEY (user_id) REFERENCES Users(user_id)
+        FOREIGN KEY (user_id) REFERENCES User(user_id)
     );
     ''',
 
-    # (7)
+    # (7) (note: TEXT is longer than CHAR, CHAR can only have 255 CHARacters max)
     '''
     CREATE TABLE UserToUser_Reviews (
         user_id_ratable INTEGER, 
         user_id_consumer INTEGER NOT NULL, 
         rating_time TIMESTAMP,
-        value UNSIGNED INTEGER NOT NULL,
-        review CHAR(256),
+        value  INTEGER NOT NULL,
+        review TEXT,
         PRIMARY KEY (user_id_ratable, user_id_consumer, rating_time),
         FOREIGN KEY (User_id_consumer) REFERENCES User(user_id),
         CHECK (value >= 1 AND value <= 5)
@@ -107,23 +109,25 @@ ddl = [
     # (9) referenced by Item, Order
     '''
     CREATE TABLE Restaurant (
-        FOREIGN KEY restaurant_name References RestaurantParent(restaurant_name),
-        FOREIGN KEY restaurant_id REFERENCES User(user_id),
-	    PRIMARY KEY (restaurant_id)
+        restaurant_id INTEGER,
+        restaurant_name CHAR(50),
+	    PRIMARY KEY (restaurant_id),
+        FOREIGN KEY (restaurant_name) References RestaurantParent(restaurant_name),
+        FOREIGN KEY (restaurant_id) REFERENCES User(user_id)
     );
     ''',
 
     # (10)
     '''
     CREATE TABLE Card_All (
-        card_number_6 char(6), 
-        card_number_rest char(10),
+        card_number_6 CHAR(6), 
+        card_number_rest CHAR(10),
         expiration_date DATE NOT NULL, 
-        zip char(6) NOT NULL
-        user_id integer NOT NULL, 
+        zip CHAR(6) NOT NULL,
+        user_id INTEGER NOT NULL, 
         PRIMARY KEY (card_number_6, card_number_rest),
-        FOREIGN KEY zip REFERENCES Zip(zip),
-        FOREIGN KEY (user_id) REFERENCES Users(user_id),
+        FOREIGN KEY (zip) REFERENCES Zip(zip),
+        FOREIGN KEY (user_id) REFERENCES User(user_id),
         FOREIGN KEY (card_number_6) REFERENCES Card_BIN(card_number_6)
     );
     ''',
@@ -131,9 +135,9 @@ ddl = [
     # (11) referenced by OrderToItem
     '''
     CREATE TABLE Item (
-        item_name char(20), 
-        restaurant_id integer,
-        price float NOT NULL,
+        item_name CHAR(20), 
+        restaurant_id INTEGER,
+        price FLOAT NOT NULL,
         PRIMARY KEY (item_name, restaurant_id),
         FOREIGN KEY (restaurant_id) REFERENCES Restaurant(restaurant_id)
     );
@@ -142,14 +146,14 @@ ddl = [
     # (12) referenced by OrderToItem
     '''
     CREATE TABLE Order (
-        order_id integer,
-        tip float NOT NULL,
-        status integer NOT NULL, 
-        order_time timestamp NOT NULL, 
-        special_instructions char(250), 
-        consumer_id integer, 
-        restaurant_id integer, 
-        speeder_id integer,
+        order_id INTEGER,
+        tip FLOAT NOT NULL,
+        status INTEGER NOT NULL,
+        order_time TIMESTAMP NOT NULL, 
+        special_instructions CHAR(250), 
+        consumer_id INTEGER, 
+        restaurant_id INTEGER, 
+        speeder_id INTEGER,
         PRIMARY KEY (order_id),
         FOREIGN KEY (consumer_id) REFERENCES User(user_id),
         FOREIGN KEY (restaurant_id) REFERENCES Restaurant(restaurant_id),
@@ -161,9 +165,9 @@ ddl = [
     # (13)
     '''
     CREATE TABLE OrderToItem (
-        order_id integer,
-        restaurant_id integer,
-        item_name char(20),
+        order_id INTEGER,
+        restaurant_id INTEGER,
+        item_name CHAR(20),
         PRIMARY KEY (order_id, restaurant_id, item_name),
         FOREIGN KEY (order_id) REFERENCES Order(order_id),
         FOREIGN KEY (item_name, restaurant_id) REFERENCES Item(item_name, restaurant_id)
