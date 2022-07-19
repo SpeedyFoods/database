@@ -1,13 +1,6 @@
 import mysql.connector
 
-db = mysql.connector.connect(
-    host="database-1.crb52cpzkqln.us-west-1.rds.amazonaws.com",
-    passwd="speedyfoods321",
-    user="admin",
-    database="testdatabase"
-)
-
-mycursor = db.cursor()
+from db_client import db, cursor
 
 # The order in which the ddl statements are executed matters,
 # since REFERENCES needs to reference a table that already has been created.
