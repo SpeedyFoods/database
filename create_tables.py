@@ -1,6 +1,6 @@
 import mysql.connector
 
-from db_client import db, cursor
+from db_client import cursor, db
 
 # The order in which the ddl statements are executed matters,
 # since REFERENCES needs to reference a table that already has been created.
@@ -168,6 +168,6 @@ ddl = [
     '''
 ]
 
-for statement in ddl: mycursor.execute(statement)
+for statement in ddl: cursor.execute(statement)
 
 db.close()
