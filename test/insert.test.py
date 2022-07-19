@@ -22,10 +22,8 @@ def get_random_phone_number():
     # returns a random 10 digit phone number
     return randint(1000000000, 9999999999)
 
-
 def get_random_user_type():
     return randint(0, 3)
-
 
 def delete_all_rows_from(table_name):
     cursor.execute(f"DELETE FROM {table_name};")
@@ -45,6 +43,7 @@ CREATE TABLE User (
 """
 insert_test("User", insert_user_query,
             ("tomi", "tomi@gmail.com", "7786966999", 0))
+
 
 """
 CREATE TABLE Card_BIN (
