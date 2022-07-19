@@ -8,7 +8,7 @@ INSERT INTO Users (
 VALUES (%s, %s, %s, %s) 
 # """
 
-inser_card_bin_query = """
+insert_card_bin_query = """
 INSERT INTO Card_BIN (
 	card_number_6,
 	bank_name,
@@ -96,9 +96,8 @@ insert_restaurant_query = """
 INSERT INTO Restaurant (
 	restaurant_name,
 	restaurant_id,
-	restaurant_id,
 )
-VALUES (%s, %s, %s)
+VALUES (%s, %s)
 """
 
 insert_restaurant_parent_query = """
