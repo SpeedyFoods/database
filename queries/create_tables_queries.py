@@ -147,7 +147,7 @@ CREATE TABLE _Order (
     FOREIGN KEY (speeder_id) REFERENCES Speeder(speeder_id),
     CHECK (status <= 3 AND status >= 0)
 );
-''',
+'''
 
 # (13)
 create_order_to_item_query = '''
