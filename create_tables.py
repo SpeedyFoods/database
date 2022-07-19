@@ -9,8 +9,6 @@ def delete_all_tables():
     cursor.execute("CREATE DATABASE testdatabase;")
     cursor.execute("use testdatabase;")
 
-# delete all tables before creating new ones
-delete_all_tables()
 
 ddl = [
     create_card_bin_table_query,
@@ -27,6 +25,9 @@ ddl = [
     create_order_table_query,
     create_order_to_item_query,
 ]
+
+# delete all tables before creating new ones
+delete_all_tables()
 
 # insert tables
 for statement in ddl: 

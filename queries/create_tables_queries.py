@@ -1,4 +1,3 @@
-
 create_card_bin_table_query = '''
 CREATE TABLE Card_BIN (
     card_number_6 CHAR(6),
