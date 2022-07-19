@@ -1,4 +1,6 @@
-from fake_values import fake_emails, fake_names
+# from fake_values import fake_emails, fake_names
+import sys
+sys.path.append('..')
 from queries.insert_queries import *
 from random import randint, randrange
 import sys
@@ -7,7 +9,6 @@ from db_client import cursor
 
 
 from numpy import insert
-sys.path.append('..')
 
 
 fake_zip = "V6R1Y5"
@@ -66,8 +67,7 @@ INSERT INTO Card_All (
 	zip,
 )
 """
-insert_test("Card All", insert_card_all_query,
-            (123456, 1111111111, datetime.now().month + datetime.now().year, fake_zip))
+insert_test("Card All", insert_card_all_query, (123456, 1111111111, datetime.now().month + datetime.now().year, fake_zip))
 
 """
 INSERT INTO Zip (
