@@ -1,12 +1,12 @@
 insert_user_query = """
-INSERT INTO Users (
+INSERT INTO User (
 	name, 
 	email, 
 	phone, 
 	type
 )
 VALUES (%s, %s, %s, %s) 
-# """
+"""
 
 insert_card_bin_query = """
 INSERT INTO Card_BIN (
@@ -19,32 +19,31 @@ VALUES (%s, %s, %s, %s)
 """
 
 insert_card_all_query = """
-# INSERT INTO Card_All (
-# 	card_number_6, 
-# 	card_number_rest,
-# 	expiration_date, 
-# 	zip,
-# )
+INSERT INTO Card_All (
+	card_number_6, 
+	card_number_rest,
+	expiration_date,
+	zip
+)
 VALUES (%s, %s, %s, %s)
 """
 
 
 insert_user_address_query = """
 INSERT INTO User_Address (
-	address_id,
 	user_id, 
 	zip,
 	building_number, 
 	unit_number, 
-	street_name,
-VALUES (%s, %s, %s, %s, %s, %s)
-);
+	street_name
+)
+VALUES (%s, %s, %s, %s, %s)
 """
 
 insert_zip_query = """
 INSERT INTO Zip (
 	zip,
-	city_name,
+	city_name
 )
 VALUES (%s, %s)
 """
@@ -63,7 +62,7 @@ INSERT INTO UserToUser_Reviews (
 	user_id_consumer, 
 	rating_time,
 	value,
-	review,
+	review
 )
 VALUES (%s, %s, %s, %s, %s)
 """
@@ -73,29 +72,28 @@ INSERT INTO Speeder (
 	speeder_id,
 	transit, 
 	current_long, 
-	current_lat,
+	current_lat
 )
 VALUES (%s, %s, %s, %s)
 """
 
 insert_order_query = """
-INSERT INTO Order (
-	order_id,
+INSERT INTO _Order (
 	tip,
 	status, 
 	order_time, 
 	special_instructions, 
 	consumer_id, 
 	restaurant_id, 
-	speeder_id,
+	speeder_id
 )
-VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+VALUES (%s, %s, %s, %s, %s, %s, %s)
 """
 
 insert_restaurant_query = """
 INSERT INTO Restaurant (
 	restaurant_name,
-	restaurant_id,
+	restaurant_id
 )
 VALUES (%s, %s)
 """
@@ -112,7 +110,7 @@ insert_item_query = """
 INSERT INTO Item (
 	item_name, 
 	restaurant_id ,
-	price,
+	price
 )
 VALUES (%s, %s, %s)
 """
@@ -122,7 +120,7 @@ insert_order_to_item_query = """
 INSERT INTO OrderToItem (
 	order_id,
 	restaurant_id,
-	item_name,
+	item_name
 )
 VALUES (%s, %s, %s)
 """

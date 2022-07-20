@@ -40,7 +40,7 @@ CREATE TABLE Zip (
 
 create_user_table_query = ''' 
 CREATE TABLE User (
-    user_id int,
+    user_id int AUTO_INCREMENT,
     name CHAR(20) NOT NULL,
     email CHAR(30) NOT NULL,
     phone CHAR(20) NOT NULL,
@@ -52,7 +52,7 @@ CREATE TABLE User (
 # (6)
 create_user_address_table_query = '''
 CREATE TABLE User_Address (
-    address_id INTEGER,
+    address_id INTEGER AUTO_INCREMENT,
     user_id INTEGER, 
     zip CHAR(6), 
     building_number INTEGER, 
@@ -81,7 +81,7 @@ CREATE TABLE UserToUser_Reviews (
 # (8)
 create_speeder_table_query = '''
 CREATE TABLE Speeder (
-    speeder_id INTEGER,
+    speeder_id INTEGER AUTO_INCREMENT,
     transit INTEGER NOT NULL, 
     current_long FLOAT NOT NULL, 
     current_lat FLOAT NOT NULL,
@@ -95,7 +95,7 @@ CREATE TABLE Speeder (
 # (9) referenced by Item, _Order
 create_restaurant_table_query = '''
 CREATE TABLE Restaurant (
-    restaurant_id INTEGER,
+    restaurant_id INTEGER AUTO_INCREMENT,
     restaurant_name CHAR(50),
     PRIMARY KEY (restaurant_id),
     FOREIGN KEY (restaurant_name) References RestaurantParent(restaurant_name),
@@ -132,7 +132,7 @@ CREATE TABLE Item (
 # (12) referenced by OrderToItem (note: Order renamed to _Order because of SQL keyword conflict)
 create_order_table_query = '''
 CREATE TABLE _Order (
-    order_id INTEGER,
+    order_id INTEGER AUTO_INCREMENT,
     tip FLOAT NOT NULL,
     status INTEGER NOT NULL,
     order_time TIMESTAMP NOT NULL, 
