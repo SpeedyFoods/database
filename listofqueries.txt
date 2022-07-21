@@ -1,0 +1,77 @@
+Queries following Milestone 5 rubric (No double dipping allowed):
+
+Selection:
+SELECT restaurant_name
+FROM RestaurantParent
+WHERE cuisine = ‘Sushi’; 
+
+Projection:
+SELECT consumer_id
+FROM Order;
+
+Join:
+SELECT restaurant_name, restaurant_id, item_name, price
+FROM Restaurant, Item
+WHERE Restaurant.restaurant_id = Item.restaurant_id;
+
+Aggregation:
+SELECT COUNT(*)
+FROM RestaurantParent;
+
+
+
+Nested aggregation with group-by: (Double-check this one)
+SELECT restaurant_id, MIN(price)
+FROM Item
+WHERE restaurant_id IN
+(SELECT restaurant_id
+FROM Restaurant
+GROUP BY restaurant name);
+
+Division query: (She hasn’t covered this yet)
+SELECT *
+FROM Order o
+WHERE NOT EXISTS 
+((SELECT r.restaurant_id
+FROM Restaurant r)
+EXCEPT
+(SELECT or.restaurant_id
+FROM Order or
+WHERE or.consumer_id = o.consumer_id));
+
+------------------------------------------------------
+
+Basic query ideas
+For customers:
+List of items offered by a certain restaurant
+Example:
+SELECT item_name
+FROM Item
+WHERE restaurant_id = 0;
+ 
+List of restaurants under a certain cuisine
+Example:
+SELECT restaurant_name
+FROM RestaurantParent
+WHERE cuisine = Sushi;
+ 
+All orders for a particular customer with id user_id (past and present)
+Example:
+SELECT *
+FROM Order
+WHERE customer_id = user_id
+ 
+For speeders:
+List of orders fulfilled by speeder of id user_id
+SELECT *
+FROM Order
+WHERE status = 3 AND speeder_id = user_id;
+ 
+ 
+ 
+Current order(s) to be fulfilled by speeder with id user_id
+SELECT *
+FROM Order
+WHERE status != 3, speeder_id = user_id;
+ 
+For restaurants(?):
