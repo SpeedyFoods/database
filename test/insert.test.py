@@ -88,7 +88,7 @@ if __name__ == "__main__":
 	);
 	"""
     insert_test("User", insert_user_query,
-                ("tomi", "tomi@gmail.com", "7786966999", 0))
+                ("tomi", "liu", "tomi@gmail.com", "7786966999", 0))
 
     """
 	INSERT INTO UserToUser_Reviews (

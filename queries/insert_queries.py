@@ -1,6 +1,7 @@
 insert_user_query = """
 INSERT INTO User (
-	name, 
+	first_name, 
+	last_name, 
 	email, 
 	phone, 
 	type

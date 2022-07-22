@@ -47,7 +47,8 @@ CREATE TABLE Zip (
 create_user_table_query = ''' 
 CREATE TABLE User (
     user_id int AUTO_INCREMENT,
-    name CHAR(20) NOT NULL,
+    first_name CHAR(20) NOT NULL,
+    last_name CHAR(20) NOT NULL,
     email CHAR(30) NOT NULL,
     phone CHAR(20) NOT NULL,
     type int NOT NULL,

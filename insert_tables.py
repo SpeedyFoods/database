@@ -35,13 +35,13 @@ def insert_sample_rows():
     insert_test("Zip", insert_zip_query, (fake_zip, "vancouver"))
 
     insert_test("User", insert_user_query,
-                ("tomi", "tomi@gmail.com", "7786966999", 0))
+                ("tomi","Liu", "tomi@gmail.com", "7786966999", 0))
 
     insert_test("User to User reviews", insert_user_to_user_reviews_query,
                 (user_id, user_id, datetime.now(), 5, "very tasty food!!"))
 
     insert_test("User Address", insert_user_address_query,
-                (address_id, fake_zip, 33, 12, "Cambie st"))
+                (user_id, fake_zip, 33, 12, "Cambie st"))
 
     insert_test("Speeder", insert_speeder_query, (user_id, 2, 123, 49))
 
