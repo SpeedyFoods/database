@@ -18,8 +18,6 @@ Aggregation:
 SELECT COUNT(*)
 FROM RestaurantParent;
 
-
-
 Nested aggregation with group-by: (Double-check this one)
 SELECT restaurant_id, MIN(price)
 FROM Item

@@ -1,10 +1,14 @@
+# (1)
+# card_type 0: debit
+# card_type 1: credit
 create_card_bin_table_query = '''
 CREATE TABLE Card_BIN (
     card_number_6 CHAR(6),
     bank_name CHAR(50) NOT NULL,
-    card_type CHAR(20) NOT NULL,
+    card_type INT NOT NULL,
     payment_system CHAR(30) NOT NULL,
-    PRIMARY KEY (card_number_6)
+    PRIMARY KEY (card_number_6),
+    CHECK (card_type >= 0 AND card_type <= 1)
 );
 '''
 
@@ -37,7 +41,9 @@ CREATE TABLE Zip (
 '''
 
 # (5) referenced by User_Address, UserToUser_Reviews, Speeder, Restaurant, Card_All
-
+# type 0: customer
+# type 1: restaurant
+# type 2: speeder
 create_user_table_query = ''' 
 CREATE TABLE User (
     user_id int AUTO_INCREMENT,
@@ -49,6 +55,7 @@ CREATE TABLE User (
     CHECK (type <= 2 AND type >= 0)
 );
 '''
+
 # (6)
 create_user_address_table_query = '''
 CREATE TABLE User_Address (
@@ -79,14 +86,18 @@ CREATE TABLE UserToUser_Reviews (
 '''
 
 # (8)
+# transit 0: walking
+# transit 1: biking
+# transit 2: driving
 create_speeder_table_query = '''
 CREATE TABLE Speeder (
-    speeder_id INTEGER AUTO_INCREMENT,
+    speeder_id INTEGER,
     transit INTEGER NOT NULL, 
     current_long FLOAT NOT NULL, 
     current_lat FLOAT NOT NULL,
     PRIMARY KEY (speeder_id),
     FOREIGN KEY (speeder_id) REFERENCES User(user_id),
+    CHECK (transit >= 0 AND transit <= 2),
     CHECK (current_long >= -180 AND current_long <= 180), 
     CHECK (current_lat >= -90 AND current_lat <= 90)
 );
@@ -95,7 +106,7 @@ CREATE TABLE Speeder (
 # (9) referenced by Item, _Order
 create_restaurant_table_query = '''
 CREATE TABLE Restaurant (
-    restaurant_id INTEGER AUTO_INCREMENT,
+    restaurant_id INTEGER,
     restaurant_name CHAR(50),
     PRIMARY KEY (restaurant_id),
     FOREIGN KEY (restaurant_name) References RestaurantParent(restaurant_name),
@@ -130,6 +141,10 @@ CREATE TABLE Item (
 '''
 
 # (12) referenced by OrderToItem (note: Order renamed to _Order because of SQL keyword conflict)
+# status 0: preparing
+# status 1: prepared
+# status 2: picked up
+# status 3: delivered
 create_order_table_query = '''
 CREATE TABLE _Order (
     order_id INTEGER AUTO_INCREMENT,

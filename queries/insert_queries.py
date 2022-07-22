@@ -23,9 +23,10 @@ INSERT INTO Card_All (
 	card_number_6, 
 	card_number_rest,
 	expiration_date,
-	zip
+	zip,
+  user_id
 )
-VALUES (%s, %s, %s, %s)
+VALUES (%s, %s, %s, %s, %s)
 """
 
 
@@ -69,7 +70,7 @@ VALUES (%s, %s, %s, %s, %s)
 
 insert_speeder_query = """
 INSERT INTO Speeder (
-	speeder_id,
+  speeder_id,
 	transit, 
 	current_long, 
 	current_lat
@@ -92,8 +93,8 @@ VALUES (%s, %s, %s, %s, %s, %s, %s)
 
 insert_restaurant_query = """
 INSERT INTO Restaurant (
-	restaurant_name,
-	restaurant_id
+	restaurant_id,
+	restaurant_name
 )
 VALUES (%s, %s)
 """

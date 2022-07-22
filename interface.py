@@ -3,10 +3,13 @@
 
 
 """
+sign_up(credit_number, address, type)
+returns success, validate all input
+
 1. sign up
  - credit card
  - address
- - sing up as speeder
+ - sign up as speeder
 
 2. register a restaurant
 
@@ -15,4 +18,4 @@
 
 4. how do we keep track of delivery?
 
- """
+"""
