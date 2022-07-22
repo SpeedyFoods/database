@@ -48,6 +48,7 @@ Register_User_Schema = {
     # address info
     "zip": { "type": "string" },
     "city": { "type": "string" },
+    "province": { "type": "string" },
     "building_number": { "type": "number" },
     "unit_number": { "type": "number" },
     "street_name": { "type": "string" },
@@ -160,5 +161,4 @@ def route_rate_restaurant():
 @app.route('/reset_database', methods=['GET'])
 def reset_database():
     create_tables()
-    insert_sample_rows()
     return "database reset"

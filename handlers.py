@@ -14,7 +14,6 @@ def get_user_id_by_email(email):
     cursor.execute(f"SELECT user_id FROM User WHERE email = '{email}'")
     myresult = cursor.fetchall()
     for x in myresult:
-        print("SEARCHED", x)
         return x[0]
 
 def value_exist_in_column(table, column, value):
@@ -40,19 +39,25 @@ def register_user(user_detail):
         # query user_id that was just inserted to be used later
         user_id = get_user_id_by_email(user_detail['email'])
 
+        city = user_detail['city'].lower()
+        if(not value_exist_in_column('City', 'city_name', city)):
+            insert_row('City', insert_city_query, (city, user_detail['province'] ))
+
+        # print("---------------- ZIP")
         # validation
         # if zip no in in column, insert it:
         if (not value_exist_in_column("Zip", 'zip', user_detail['zip'])):
             insert_row("Zip", insert_zip_query, (user_detail['zip'], user_detail['city']))
 
+        # print("---------------- ADDRESS")
         # INSERT ADDRESS
         insert_row("Address", insert_user_address_query, (user_id, user_detail['zip'], user_detail['building_number'], 
             user_detail['unit_number'], user_detail['street_name']))
 
         # remember to validate cardnumber has 16 digits
         [card_number_6,card_number_rest] = split_card_number(user_detail['card_number'])
-        print(card_number_6,card_number_rest)
 
+        # print("---------------- CARDBIN")
         # INSERT CARD BIN
         # validation:
         if (not value_exist_in_column('Card_BIN', 'card_number_6', card_number_6)):
@@ -60,6 +65,7 @@ def register_user(user_detail):
                 user_detail['bank_name'], user_detail['card_type'],
                 user_detail['payment_system']))
 
+        # print("---------------- Card_ALL")
         # INSERT CARD ALL
         insert_row("Card_All", insert_card_all_query, (card_number_6, 
             card_number_rest, user_detail['expiration_date'], 
@@ -74,7 +80,6 @@ def register_user(user_detail):
         print("Failed to insert user data")
         print(e)
         return res
-
 
 # TODO:
 def register_restaurant():

@@ -13,7 +13,7 @@ user_id, address_id, order_id = 1, 1, 1
 
 def insert_test(query_name, insert_query, insert_tuple):
     cursor.execute(insert_query, insert_tuple)
-    print(f"{query_name} inserted successfully")
+    print(f"{query_name} inserted successfully with values {insert_tuple}")
     db.commit()
 
 
