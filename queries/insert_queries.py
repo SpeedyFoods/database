@@ -6,7 +6,7 @@ INSERT INTO User (
 	phone, 
 	type
 )
-VALUES (%s, %s, %s, %s) 
+VALUES (%s, %s, %s, %s, %s) 
 """
 
 insert_card_bin_query = """
@@ -25,7 +25,7 @@ INSERT INTO Card_All (
 	card_number_rest,
 	expiration_date,
 	zip,
-  user_id
+	user_id
 )
 VALUES (%s, %s, %s, %s, %s)
 """

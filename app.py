@@ -1,8 +1,10 @@
 from flask import Flask
 from flask import request
 from flask_expects_json import expects_json
+from create_tables import create_tables
 
 from handlers import register_user, register_restaurant, place_order, rate_restaurant
+from insert_tables import insert_sample_rows
 
 app = Flask(__name__)
 
@@ -41,11 +43,12 @@ Register_User_Schema = {
     "type": { "type": "number" },
     # address info
     "zip": { "type": "string" },
+    "city": { "type": "string" },
     "building_number": { "type": "number" },
     "unit_number": { "type": "number" },
     "street_name": { "type": "string" },
     # card number info
-    "card_number": { "type": "number" },
+    "card_number": { "type": "string" },
     "expiration_date": { "type": "number" }, 
   },
   "required": [
@@ -82,7 +85,7 @@ Example Post body:
 @expects_json(Register_User_Schema)
 def route_register_user():
     user_details = request.get_json(force=True)
-    # register_user(user_details)
+    register_user(user_details)
     return user_details
 
 Register_Restaurant_Schema = {
@@ -93,7 +96,7 @@ Register_Restaurant_Schema = {
     "phone": { "type": "string" },
   },
 }
-@app.route('/user_sign_up', methods=['POST'])
+@app.route('/register_restaurant', methods=['POST'])
 @expects_json(Register_Restaurant_Schema)
 def route_register_restaurant():
     restaurant_details = request.get_json(force=True)
@@ -148,3 +151,9 @@ def route_rate_restaurant():
     rate_restaurant(rating_details)
     return rating_details
 
+
+@app.route('/reset_database', methods=['GET'])
+def reset_database():
+    create_tables()
+    insert_sample_rows()
+    return "database reset"
