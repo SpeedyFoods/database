@@ -85,8 +85,8 @@ Example Post body:
 @expects_json(Register_User_Schema)
 def route_register_user():
     user_details = request.get_json(force=True)
-    register_user(user_details)
-    return user_details
+    result = register_user(user_details)
+    return result
 
 Register_Restaurant_Schema = {
   "type": "object",
@@ -104,6 +104,7 @@ def route_register_restaurant():
     return restaurant_details
 
 # Place an order
+# discussion: we have to think how we want our data
 Place_Order_Schema = {
   "type": "object",
   "properties": {

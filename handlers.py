@@ -55,8 +55,8 @@ def register_user(user_detail):
 
         # INSERT CARD BIN
         # validation:
-        if (not value_exist_in_column(card_number_6, 'Card_BIN', user_detail['card_number_6'])):
-            insert_row("Card_BIN", insert_card_bin_query, (user_detail['card_number_6'], 
+        if (not value_exist_in_column('Card_BIN', 'card_number_6', card_number_6)):
+            insert_row("Card_BIN", insert_card_bin_query, (card_number_6, 
                 user_detail['bank_name'], user_detail['card_type'],
                 user_detail['payment_system']))
 
@@ -69,11 +69,11 @@ def register_user(user_detail):
         return res
 
     # i think there is a better way to catch error messages
-    except:
-        res['error'] = "Failed to insert user data"
+    except Exception as e:
+        res['error'] = "Failed to insert user data" + str(e)
+        print("Failed to insert user data")
+        print(e)
         return res
-    
-
 
 def register_restaurant():
     pass
