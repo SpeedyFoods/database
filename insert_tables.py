@@ -23,7 +23,6 @@ def insert_sample_rows():
     insert_test("Card BIN", insert_card_bin_query,
                 (123456, "CIBC", 0, "Visa"))
 
-    # not sure how to insert this
     # must convert input to lower case
     insert_test("Restaurant Parent", insert_restaurant_parent_query,
                 ("McDonalds", "Fast Food"))
@@ -41,30 +40,24 @@ def insert_sample_rows():
     insert_test("User to User reviews", insert_user_to_user_reviews_query,
                 (user_id, user_id, datetime.now(), 5, "very tasty food!!"))
 
-    # cannot insert due to foreign key constraint
     insert_test("User Address", insert_user_address_query,
                 (address_id, fake_zip, 33, 12, "Cambie st"))
 
-    # speeder id?
     insert_test("Speeder", insert_speeder_query, (user_id, 2, 123, 49))
 
     # must convert input to lower case
     insert_test("Restaurant", insert_restaurant_query, (user_id, "McDonalds"))
 
-    # cannot update because of foreign key constraint
     insert_test("Card All", insert_card_all_query, (123456, 1111111111,
                 datetime.now().month + datetime.now().year, fake_zip, user_id))
 
-    # cannot update because of foreign key constraint
     insert_test("Item", insert_item_query, ("chicken nuggets", user_id, 6.9))
 
     # order id?
     # remember to consider status for future
-    # cannot update because of foreign key constraint
     insert_test("Order", insert_order_query,
                (1.3, 2, datetime.now(), "Please include utensils", user_id, user_id, user_id))
 
-    # cannot update because of foreign key constraint
     insert_test("Order to Item", insert_order_to_item_query,
                 (order_id, user_id, "chicken nuggets"))
 
