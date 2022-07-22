@@ -32,7 +32,7 @@ $ flask run
 
 # Endpoint Documentation
 
-# /user_sign_up
+## /user_sign_up
 payload example:
 ``` json
 {
@@ -54,11 +54,11 @@ payload example:
 }
 
 ```
-# /place_order
+## /place_order
 
-# /register_restaurant
+## /register_restaurant
 
-# /rate_restaurant
+## /rate_restaurant
 
-# /reset_database
+## /reset_database
 - resets the database
