@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 from flask import request
 from flask_expects_json import expects_json
 from create_tables import create_tables
@@ -30,7 +30,11 @@ returns success, validate all input
 
 @app.route('/')
 def hello_world():
-    return 'Hello, World!'
+    return render_template(
+            'home.html',
+            title="Home",
+            description="Order Now!"
+        )
 
 Register_User_Schema = {
   "type": "object",

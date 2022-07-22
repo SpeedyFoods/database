@@ -19,7 +19,7 @@ def get_user_id_by_email(email):
 
 def value_exist_in_column(table, column, value):
     """
-    returns true if value exists in column from database
+    returns true if 'value' exists in 'column' from 'table'
     """
     cursor.execute(f"select * from {table} where {column} = '{value}'")
     myresult = cursor.fetchall()
