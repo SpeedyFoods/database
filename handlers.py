@@ -75,6 +75,8 @@ def register_user(user_detail):
         print(e)
         return res
 
+
+# TODO:
 def register_restaurant():
     pass
 
@@ -84,4 +86,16 @@ def place_order():
 
 
 def rate_restaurant():
+    pass
+
+# Select queries here?
+
+def view_users():
+    pass
+
+
+def view_restaurants():
+    pass
+
+def view_restaurant_items():
     pass
