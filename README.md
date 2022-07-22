@@ -42,7 +42,7 @@ payload example:
     "phone": 77870777777,
     "type": 0,
     "zip": "V6R1Y9",
-	"city": "vancouver",
+    "city": "vancouver",
     "building_number": 1111, 
     "unit_number": 0,
     "street_name": "Cambie st",
