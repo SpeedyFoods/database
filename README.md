@@ -33,19 +33,27 @@ $ flask run
 # Endpoint Documentation
 
 # /user_sign_up
-  "required": [
-    "first_name",
-    "last_name",
-    "email",
-    "phone",
-    "type",
-    "zip",
-    "building_number",
-    "unit_number",
-    "street_name",
-    "card_number",
-    "expiration_date",
-  ]
+payload example:
+``` json
+{
+    "first_name": "tomiii",
+    "last_name": "liu",
+    "email": "tomi69@gmail.com",
+    "phone": 77870777777,
+    "type": 0,
+    "zip": "V6R1Y9",
+		"city": "vancouver",
+    "building_number": 1111, 
+    "unit_number": 0,
+    "street_name": "Cambie st",
+    "card_number": "1234561234567890",
+    "expiration_date": 1234,
+		"bank_name": "CIBC",
+		"card_type": "debit",
+		"payment_system": "visa"
+}
+
+```
 # /place_order
 
 # /register_restaurant
