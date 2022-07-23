@@ -93,6 +93,7 @@ def place_order():
 def rate_restaurant():
     pass
 
+# --------------------------------------------------
 # Select queries here?
 
 def view_users():

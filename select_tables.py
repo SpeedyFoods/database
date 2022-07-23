@@ -7,7 +7,6 @@ from create_tables import create_tables
 
 from utils import delete_all_rows_from_database, list_of_tables
 
-
 def select_sample_rows():
     cursor.execute("SELECT restaurant_name FROM RestaurantParent WHERE cuisine = 'Fast Food'")
     record = cursor.fetchall()

@@ -10,24 +10,6 @@ app = Flask(__name__)
 
 from db_client import db, cursor
 
-"""
-sign_up(credit_number, address, type)
-returns success, validate all input
-
-1. sign up
- - credit card
- - address
- - sign up as speeder
-
-2. register a restaurant
-
-3. place an order
-- order item?
-
-4. how do we keep track of delivery?
-
-"""
-
 @app.route('/')
 def hello_world():
     return render_template(
@@ -70,22 +52,6 @@ Register_User_Schema = {
     "expiration_date",
   ]
 }
-"""
-Example Post body:
-{
-    "first_name": "tomi",
-    "last_name": "liu",
-    "email": "tomi69@gmail.com",
-    "phone": 77870777777,
-    "type": 0,
-    "zip": "V6R1Y9",
-    "building_number": 1111, 
-    "unit_number": 0,
-    "street_name": "Cambie st",
-    "card_number": 1234561234567890,
-    "expiration_date": 1234
-}
-"""
 @app.route('/user_sign_up', methods=['POST'])
 @expects_json(Register_User_Schema)
 def route_register_user():
@@ -109,7 +75,7 @@ def route_register_restaurant():
     return restaurant_details
 
 # Place an order
-# discussion: we have to think how we want our data
+# discuss: we have to think how we want our data
 Place_Order_Schema = {
   "type": "object",
   "properties": {
@@ -158,6 +124,7 @@ def route_rate_restaurant():
     return rating_details
 
 
+# discussion
 @app.route('/reset_database', methods=['GET'])
 def reset_database():
     create_tables()
