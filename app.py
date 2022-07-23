@@ -81,16 +81,15 @@ Place_Order_Schema = {
   "properties": {
     "tip": { "type": "string" },
     "status": { "type": "string" },
-    # "order_time": { "type": "string" },
     "special_instructions": { "type": "string" },
-	# consumer_id, 
+	# consumer_id how do we get consumer ID? 
     # should discuss this with team
     "consumer_id": { "type": "string" },
-	# restaurant_id, 
+	# restaurant_id: how do we get restaurant ID?
     "consumer_name": { "type": "string" },
     # or
     "restaurant_id": { "type": "string" },
-	# speeder_id
+	# speeder_id: How do we get Speeder ID?
     "speeder_id": { "type": "string" },
     # or 
     "restaurant_name": { "type": "string" },
