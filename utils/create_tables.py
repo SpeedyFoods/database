@@ -1,6 +1,10 @@
+"""
+
+this exports a function that creates all the tables needed for our database
+"""
 from queries.create_tables_queries import *
 from db_client import cursor, db
-from utils import delete_all_tables
+from utils.helper import delete_all_tables
 
 
 # The order in which the ddl statements are executed matters,

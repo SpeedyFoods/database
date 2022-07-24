@@ -1,3 +1,6 @@
+"""
+Has the functions that handle the API endpoints
+"""
 from db_client import db, cursor
 from queries.insert_queries import *
 
@@ -90,18 +93,41 @@ def place_order():
     pass
 
 
-def rate_restaurant():
+def rate_restaurant(user_detail):
+    
+    # insert_user_to_user_reviews_query = """
+    # INSERT INTO UserToUser_Reviews (
+    # user_id_ratable, 
+    # user_id_consumer, 
+    # rating_time,
+    # value,
+    # review
+    # )
+    # VALUES (%s, %s, %s, %s, %s)
+    # """
+    # remember to implement try catch
+    # find the user id ratable by doing a select search statemet
+    user_id_ratable = user_detail['restaurant']
+    # find the user_id_consumer ratable by doing a select search statemet
+
+    insert_row("user to user reviews", insert_user_to_user_reviews_query, (user_id_ratable, 
+                user_detail['c'], user_detail['c'], user_detail[''], user_detail['c']))
+
     pass
 
 # --------------------------------------------------
 # Select queries here?
 
 def view_users():
+    """
+    goal is to return a list of user detail
+    """
     pass
 
 
 def view_restaurants():
     pass
+
 
 def view_restaurant_items():
     pass

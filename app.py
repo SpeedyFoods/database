@@ -1,10 +1,14 @@
+"""
+application to run the python flask server
+"""
+
 from flask import Flask, render_template
 from flask import request
 from flask_expects_json import expects_json
-from create_tables import create_tables
+from utils.create_tables import create_tables
 
 from handlers import register_user, register_restaurant, place_order, rate_restaurant
-from insert_tables import insert_sample_rows
+from utils.insert_tables import insert_sample_rows
 
 app = Flask(__name__)
 
@@ -56,8 +60,11 @@ Register_User_Schema = {
 @expects_json(Register_User_Schema)
 def route_register_user():
     user_details = request.get_json(force=True)
-    result = register_user(user_details)
-    return result
+    try:
+      result = register_user(user_details)
+      return result
+    except Exception as e:
+      print(e)
 
 Register_Restaurant_Schema = {
   "type": "object",
@@ -108,8 +115,8 @@ Rate_Restaurant_Schema = {
   "type": "object",
   "properties": {
     "tip": { "type": "string" },
-    "user_id_ratable": { "type": "string" },
-    "user_id_consumer": { "type": "string" },
+    "restaurant": { "type": "string" },
+    "user_email": { "type": "string" },
     "rating_time": { "type": "string" },
     "value": { "type": "string" },
     "review": { "type": "string" },

@@ -108,7 +108,7 @@ CREATE TABLE Speeder (
 create_restaurant_table_query = '''
 CREATE TABLE Restaurant (
     restaurant_id INTEGER,
-    restaurant_name CHAR(50),
+    restaurant_name CHAR(50) UNIQUE,
     PRIMARY KEY (restaurant_id),
     FOREIGN KEY (restaurant_name) References RestaurantParent(restaurant_name),
     FOREIGN KEY (restaurant_id) REFERENCES User(user_id)

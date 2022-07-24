@@ -1,3 +1,6 @@
+"""
+This file contains a list of fake data
+"""
 fake_names = [
     ["Annabel", "Downs"],
     ["Marquis", "Ritter"],

@@ -4,7 +4,7 @@ from datetime import date, datetime
 from random import randint, randrange
 from queries.insert_queries import *
 
-from utils import delete_all_rows_from_database, list_of_tables
+from utils.helper import delete_all_rows_from_database, list_of_tables
 
 fake_zip = "V6R1Y5"
 # user_id, address_id, order_id are autoincremented, doing sample data for one user/address/order only

@@ -1,5 +1,9 @@
+"""
+misc helper function
+"""
+import string
 from db_client import cursor
-from random import randint
+from random import choice, randint
 
 list_of_tables = [
     "Card_BIN",
@@ -21,6 +25,15 @@ def get_random_phone_number():
     # returns a random 10 digit phone number
     return randint(1000000000, 9999999999)
 
+def generate_fake_zip():
+    zip = choice(string.ascii_letters) + str(randint(0, 9)) + choice(string.ascii_letters) + \
+        str(randint(0, 9)) + choice(string.ascii_letters) + str(randint(0, 9))
+    return zip.upper()
+
+
+def get_random_item_from(item_list):
+    # returns a random item from a given list
+    return item_list[randint(0, len(item_list)-1)]
 
 def get_random_user_type():
     return randint(0, 3)

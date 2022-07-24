@@ -1,22 +1,15 @@
+"""
+This file is a script that helps us populate all data(rows) to all of our Tables. 
+a file that helps us insert bulk data to our database using our main funcitons from handlers.py
+"""
 
-from fake_values import fake_names, email_providers, bc_cities, fake_street_names, bank_names, debit_credit, visa_mastercard
+from utils.fake_values import fake_names, email_providers, bc_cities, fake_street_names, bank_names, debit_credit, visa_mastercard
 from random import randint, choice
 import string
 from handlers import register_user
-
-
-def generate_fake_zip():
-    zip = choice(string.ascii_letters) + str(randint(0, 9)) + choice(string.ascii_letters) + \
-        str(randint(0, 9)) + choice(string.ascii_letters) + str(randint(0, 9))
-    return zip.upper()
-
-
-def get_random_item_from(item_list):
-    # returns a random item from a given list
-    return item_list[randint(0, len(item_list)-1)]
+from utils.helper import generate_fake_zip, get_random_item_from
 
 # discuss
-
 
 def populate_register_user():
     """
@@ -59,5 +52,14 @@ def populate_rate_restaurant():
     pass
 
 
-if __name__ == "__main__":
+def insert_random_data():
+
     populate_register_user()
+    populate_register_restaurant()
+    populate_place_order()
+    populate_rate_restaurant()
+if __name__ == "__main__":
+    """
+    The order of which we want to populate the tables
+    """
+    insert_random_data()
