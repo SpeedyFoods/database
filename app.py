@@ -7,8 +7,8 @@ from flask import request
 from flask_expects_json import expects_json
 from utils.create_tables import create_tables
 
-from handlers import register_user, register_restaurant, place_order, rate_restaurant
-from utils.insert_tables import insert_sample_rows
+from handlers import insert_restaurant_item, register_user, register_restaurant, place_order, rate_restaurant
+from utils.insert_single_rows import insert_sample_rows
 
 app = Flask(__name__)
 
@@ -69,9 +69,9 @@ def route_register_user():
 Register_Restaurant_Schema = {
   "type": "object",
   "properties": {
+    "restaurant_manager_email": { "type": "string" },
     "restaurant_name": { "type": "string" },
     "cuisine": { "type": "string" },
-    "phone": { "type": "string" },
   },
 }
 @app.route('/register_restaurant', methods=['POST'])
@@ -81,6 +81,23 @@ def route_register_restaurant():
     register_restaurant(restaurant_details)
     return restaurant_details
 
+
+Restaurant_Item_Schema = {
+  "type": "object",
+  "properties": {
+    "item_name": { "type": "string" },
+    "restaurant_name": { "type": "string" },
+    "price": { "type": "number" },
+    "user_email": { "type": "string" },
+  },
+}
+@app.route('/insert_restaurant_item', methods=['POST'])
+@expects_json(Restaurant_Item_Schema)
+def route_restaurant_item():
+    restaurant_item = request.get_json(force=True)
+    insert_restaurant_item(restaurant_item)
+    return restaurant_item
+
 # Place an order
 # discuss: we have to think how we want our data
 Place_Order_Schema = {
@@ -89,17 +106,9 @@ Place_Order_Schema = {
     "tip": { "type": "string" },
     "status": { "type": "string" },
     "special_instructions": { "type": "string" },
-	# consumer_id how do we get consumer ID? 
-    # should discuss this with team
-    "consumer_id": { "type": "string" },
-	# restaurant_id: how do we get restaurant ID?
-    "consumer_name": { "type": "string" },
-    # or
-    "restaurant_id": { "type": "string" },
-	# speeder_id: How do we get Speeder ID?
-    "speeder_id": { "type": "string" },
-    # or 
+    "consumer_email": { "type": "string" },
     "restaurant_name": { "type": "string" },
+    "item_name": { "type": "string" },
   },
 }
 @app.route('/place_order', methods=['POST'])

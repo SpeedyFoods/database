@@ -3,11 +3,12 @@ This file is a script that helps us populate all data(rows) to all of our Tables
 a file that helps us insert bulk data to our database using our main funcitons from handlers.py
 """
 
-from utils.fake_values import fake_names, email_providers, bc_cities, fake_street_names, bank_names, debit_credit, visa_mastercard
+from utils.fake_values import list_of_dishes, list_of_cuisine, restaurant_names, fake_names, email_providers, bc_cities, fake_street_names, bank_names, debit_credit, visa_mastercard
 from random import randint, choice
-import string
-from handlers import register_user
-from utils.helper import generate_fake_zip, get_random_item_from
+from db_client import cursor
+from handlers import get_restaurant_id_by_name, insert_restaurant_item, insert_row, place_order, register_restaurant, register_user
+from utils.helper import generate_fake_zip, get_random_item_from, get_random_item_from_restaurant, get_random_restaurant_from_db, get_random_user_email_from_db
+from queries.insert_queries import insert_speeder_query
 
 # discuss
 
@@ -15,7 +16,7 @@ def populate_register_user():
     """
     insert 10 random user data information to the tables User, Address, Zip, Card_BIN, Card_All
     """
-    for i in range(10):
+    for _ in range(10):
         [first_name, last_name] = get_random_item_from(fake_names)
         fake_user_details = {
             "first_name": first_name,
@@ -38,14 +39,46 @@ def populate_register_user():
         register_user(fake_user_details)
 
 
-# discuss
-# TODO:
+def populate_register_speeder():
+    for i in range(5):
+        try:
+            insert_row("Speeder", insert_speeder_query, (i, 2, 123, 49))
+        except:
+            pass
+
 def populate_register_restaurant():
+    for i in range(10):
+        register_restaurant_detail = {
+            "restaurant_manager_email": get_random_user_email_from_db(),
+            "restaurant_name": get_random_item_from(restaurant_names),
+            "cuisine": get_random_item_from(list_of_cuisine),
+        }
+        register_restaurant(register_restaurant_detail)
+
+def populate_insert_restaurant_item():
+    for i in range(50):
+        item_details = {
+            "item_name": get_random_item_from(list_of_dishes),
+            "restaurant_name": get_random_restaurant_from_db(),
+            "price": randint(1, 30),
+            'user_email': get_random_user_email_from_db()
+        }
+        insert_restaurant_item(item_details)
+
+def populate_place_order():
+    for i in range(10):
+        restaurant_name = get_random_restaurant_from_db()
+        example_order = {
+            'tip': randint(0, 20),
+            'status': 0,
+            'special_instructions': ["None", "please Include utensils"][randint(0, 1)],
+            'consumer_email': get_random_user_email_from_db(),
+            'restaurant_name':restaurant_name,
+            'item_name': get_random_item_from_restaurant(restaurant_name)
+        }
+        place_order(example_order)
     pass
 
-# TODO: might not need to do this
-def populate_place_order():
-    pass
 
 # TODO:
 def populate_rate_restaurant():
@@ -53,11 +86,14 @@ def populate_rate_restaurant():
 
 
 def insert_random_data():
-
-    populate_register_user()
-    populate_register_restaurant()
+    # populate_register_user()
+    # populate_register_speeder()
+    # populate_register_restaurant()
+    # populate_insert_restaurant_item()
     populate_place_order()
-    populate_rate_restaurant()
+    # populate_rate_restaurant()
+
+
 if __name__ == "__main__":
     """
     The order of which we want to populate the tables

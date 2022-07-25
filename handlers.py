@@ -1,32 +1,24 @@
 """
 Has the functions that handle the API endpoints
 """
+import datetime
 from db_client import db, cursor
 from queries.insert_queries import *
+from utils.helper import get_random_speeder_id_from_db, get_restaurant_id_by_name, get_user_id_by_email, split_card_number, value_exist_in_column
 
 
 def insert_row(query_name, insert_query, insert_tuple):
-    cursor.execute(insert_query, insert_tuple)
-    print(f"{query_name} inserted successfully")
-    db.commit()
-
-def split_card_number(card_number):
-    return [card_number[0:5], card_number[5:]]
-
-def get_user_id_by_email(email):
-    cursor.execute(f"SELECT user_id FROM User WHERE email = '{email}'")
-    myresult = cursor.fetchall()
-    for x in myresult:
-        return x[0]
-
-def value_exist_in_column(table, column, value):
     """
-    returns true if 'value' exists in 'column' from 'table'
+    Inserts the values into the table then returns the id/primary key of the last inserted row
     """
-    cursor.execute(f"select * from {table} where {column} = '{value}'")
-    myresult = cursor.fetchall()
-    return len(myresult) > 0
-
+    try:
+        cursor.execute(insert_query, insert_tuple)
+        print(f"{query_name} inserted successfully")
+        db.commit()
+        return cursor.lastrowid
+    except Exception as e:
+        print(e)
+        print(f"failed to insert to table {query_name}")
 
 def register_user(user_detail):
     # we should do data validation. right now im able to insert multiple users with the same info. Myabe change some values to UNIQUE?
@@ -39,37 +31,26 @@ def register_user(user_detail):
         insert_row("User", insert_user_query, (user_detail['first_name'], 
             user_detail['last_name'], user_detail['email'], user_detail['phone'], user_detail['type']))
 
-        # query user_id that was just inserted to be used later
         user_id = get_user_id_by_email(user_detail['email'])
 
         city = user_detail['city'].lower()
         if(not value_exist_in_column('City', 'city_name', city)):
             insert_row('City', insert_city_query, (city, user_detail['province'] ))
 
-        # print("---------------- ZIP")
-        # validation
-        # if zip no in in column, insert it:
         if (not value_exist_in_column("Zip", 'zip', user_detail['zip'])):
             insert_row("Zip", insert_zip_query, (user_detail['zip'], user_detail['city']))
 
-        # print("---------------- ADDRESS")
-        # INSERT ADDRESS
         insert_row("Address", insert_user_address_query, (user_id, user_detail['zip'], user_detail['building_number'], 
             user_detail['unit_number'], user_detail['street_name']))
 
         # remember to validate cardnumber has 16 digits
         [card_number_6,card_number_rest] = split_card_number(user_detail['card_number'])
 
-        # print("---------------- CARDBIN")
-        # INSERT CARD BIN
-        # validation:
         if (not value_exist_in_column('Card_BIN', 'card_number_6', card_number_6)):
             insert_row("Card_BIN", insert_card_bin_query, (card_number_6, 
                 user_detail['bank_name'], user_detail['card_type'],
                 user_detail['payment_system']))
 
-        # print("---------------- Card_ALL")
-        # INSERT CARD ALL
         insert_row("Card_All", insert_card_all_query, (card_number_6, 
             card_number_rest, user_detail['expiration_date'], 
             user_detail['zip'], user_id))
@@ -84,14 +65,64 @@ def register_user(user_detail):
         print(e)
         return res
 
-# TODO:
-def register_restaurant():
-    pass
+def register_restaurant(restaurant_detail):
+    res = {}
+    res['success'] = False
+    res['error'] = "no errors"
+    try:
+        manager_id = get_user_id_by_email(restaurant_detail['restaurant_manager_email'])
+        if (manager_id == None):
+            res['error'] = f"User with email {restaurant_detail['restaurant_manager_email']} does not Exist"
+        
+        print("1")
+        if (not value_exist_in_column('RestaurantParent', 'restaurant_name',restaurant_detail['restaurant_name'])):
+            insert_row("Restaurant Parent", insert_restaurant_parent_query,
+                    (restaurant_detail['restaurant_name'], restaurant_detail['cuisine']))
+        
+        print("2")
+        insert_row("Restaurant", insert_restaurant_query, (manager_id, restaurant_detail['restaurant_name']))
+
+    except Exception as e:
+        res['error'] = "Failed to insert user data" + str(e)
+        print("Failed to register user")
+        print(e)
+        return res
 
 
-def place_order():
-    pass
+def insert_restaurant_item(register_item_detail):
+    res = {}
+    res['success'] = False
+    res['error'] = "no errors"
+    try:
+        restaurant_id = get_restaurant_id_by_name(register_item_detail['restaurant_name'])
+        insert_row("Item", insert_item_query, (register_item_detail['item_name'], restaurant_id, register_item_detail['item_name']))
+    except Exception as e:
+        res['error'] = "Failed to insert user data" + str(e)
+        print("Failed to insert restaurant item")
+        print(e)
+        return res
+    return res
 
+
+# def get_order_id_
+def place_order(order_detail):
+    res = {}
+    res['success'] = False
+    res['error'] = "no errors"
+    try:
+        consumer_id = get_user_id_by_email(order_detail['consumer_email'])
+        restaurant_id = get_restaurant_id_by_name(order_detail['restaurant_name'])
+
+        order_id = insert_row("_Order", insert_order_query,
+                (order_detail['tip'],0 , datetime.datetime.now(), order_detail['special_instructions'], consumer_id, restaurant_id, get_random_speeder_id_from_db()))
+            
+        insert_row("Order to Item", insert_order_to_item_query,
+                    (order_id, restaurant_id, order_detail['item_name']))
+    except Exception as e:
+        res['error'] = "Failed to insert user data" + str(e)
+        print("Failed to place order" + str(e))
+        print(e)
+        return res
 
 def rate_restaurant(user_detail):
     
@@ -113,8 +144,6 @@ def rate_restaurant(user_detail):
     insert_row("user to user reviews", insert_user_to_user_reviews_query, (user_id_ratable, 
                 user_detail['c'], user_detail['c'], user_detail[''], user_detail['c']))
 
-    pass
-
 # --------------------------------------------------
 # Select queries here?
 
@@ -131,3 +160,7 @@ def view_restaurants():
 
 def view_restaurant_items():
     pass
+
+# if __name__ == "__main__":
+    # insert_row("Order", insert_order_query,
+    #         (2,0 , datetime.datetime.now(), "thanks", 0, 0, get_random_speeder_id_from_db()))

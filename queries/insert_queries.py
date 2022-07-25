@@ -71,7 +71,7 @@ VALUES (%s, %s, %s, %s, %s)
 
 insert_speeder_query = """
 INSERT INTO Speeder (
-  speeder_id,
+	speeder_id,
 	transit, 
 	current_long, 
 	current_lat

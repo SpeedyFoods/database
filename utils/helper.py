@@ -21,6 +21,54 @@ list_of_tables = [
     "OrderToItem ",
 ]
 
+
+def get_random_item_from_restaurant(restaurant_name):
+    restaurant_id = get_restaurant_id_by_name(restaurant_name)
+    cursor.execute(f"select item_name from Item WHERE restaurant_id = '{restaurant_id}' ORDER BY RAND() ")
+    myresult = cursor.fetchone()
+    return myresult[0]
+
+def get_random_user_email_from_db():
+    cursor.execute("select email from User ORDER BY RAND()")
+    myresult = cursor.fetchall()
+    return myresult[0][0]
+
+def get_random_restaurant_from_db():
+    cursor.execute("select restaurant_name from Restaurant ORDER BY RAND()")
+    myresult = cursor.fetchall()
+    return myresult[0][0]
+
+
+
+def split_card_number(card_number):
+    return [card_number[0:5], card_number[5:]]
+
+def get_user_id_by_email(email):
+    cursor.execute(f"SELECT user_id FROM User WHERE email = '{email}'")
+    myresult = cursor.fetchall()
+    for x in myresult:
+        return x[0]
+
+def get_restaurant_id_by_name(restaurant_name):
+    cursor.execute(f"SELECT restaurant_id FROM Restaurant WHERE restaurant_name = '{restaurant_name}'")
+    myresult = cursor.fetchall()
+    return myresult[0][0]
+
+def get_random_speeder_id_from_db():
+    cursor.execute("select speeder_id from Speeder ORDER BY RAND()")
+    myresult = cursor.fetchall()
+    return myresult[0][0]
+
+def value_exist_in_column(table, column, value):
+    """
+    returns true if 'value' exists in 'column' from 'table'
+    """
+    cursor.execute(f"select * from {table} where {column} = '{value}'")
+    myresult = cursor.fetchall()
+    return len(myresult) > 0
+
+
+
 def get_random_phone_number():
     # returns a random 10 digit phone number
     return randint(1000000000, 9999999999)
@@ -37,7 +85,6 @@ def get_random_item_from(item_list):
 
 def get_random_user_type():
     return randint(0, 3)
-
 
 def delete_all_rows_from_table(table_name):
     cursor.execute(f"DELETE FROM {table_name};")
