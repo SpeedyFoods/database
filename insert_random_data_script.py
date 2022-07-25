@@ -10,13 +10,11 @@ from handlers import get_restaurant_id_by_name, insert_restaurant_item, insert_r
 from utils.helper import generate_fake_zip, get_random_item_from, get_random_item_from_restaurant, get_random_restaurant_from_db, get_random_user_email_from_db
 from queries.insert_queries import insert_speeder_query
 
-# discuss
-
 def populate_register_user():
     """
     insert 10 random user data information to the tables User, Address, Zip, Card_BIN, Card_All
     """
-    for _ in range(10):
+    for _ in range(20):
         [first_name, last_name] = get_random_item_from(fake_names)
         fake_user_details = {
             "first_name": first_name,
@@ -47,10 +45,11 @@ def populate_register_speeder():
             pass
 
 def populate_register_restaurant():
-    for i in range(10):
+    for i in range(len(restaurant_names)):
+
         register_restaurant_detail = {
             "restaurant_manager_email": get_random_user_email_from_db(),
-            "restaurant_name": get_random_item_from(restaurant_names),
+            "restaurant_name": restaurant_names[i],
             "cuisine": get_random_item_from(list_of_cuisine),
         }
         register_restaurant(register_restaurant_detail)
@@ -77,21 +76,19 @@ def populate_place_order():
             'item_name': get_random_item_from_restaurant(restaurant_name)
         }
         place_order(example_order)
-    pass
 
-
-# TODO:
+# TODO: Rithik
 def populate_rate_restaurant():
     pass
 
 
 def insert_random_data():
-    # populate_register_user()
-    # populate_register_speeder()
-    # populate_register_restaurant()
-    # populate_insert_restaurant_item()
+    populate_register_user()
+    populate_register_speeder()
+    populate_register_restaurant()
+    populate_insert_restaurant_item()
     populate_place_order()
-    # populate_rate_restaurant()
+    populate_rate_restaurant()
 
 
 if __name__ == "__main__":

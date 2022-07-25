@@ -7,14 +7,107 @@
     <title>Document</title>
 </head>
 <body>
-    <!-- discuss -->
+
+    <!-- FORMS: -->
+    <!-- TODO: A form to submit to user_sign_up -->
+
+    <!--  A button that shows a list of Users -->
+    <form action="/view_users">
+        <input type="submit" value="View Users" />
+    </form>
+
+    <!-- A button that shows a list of Restaurants along with their raitng -->
+    <form action="/view_restaurants">
+        <input type="submit" value="View Restaurants" />
+    </form>
+
+    <!-- TODO: A button that shows a list of Restaurant Items -->
+    <form action="/view_restaurant_items" method="post">
+        <input type="text" id="restaurant_name" name="restaurant_name" value="">
+        <input type="submit" value="View Items from restaurant" />
+    </form>
+    <!-- TODO: A button that shows a list of Pending Orders -->
+    <form action="/view_orders">
+        <input type="submit" value="View orders" />
+    </form>
+
+    <h1>Register User</h1>
+    <!-- A form to register a user -->
+    <!-- METADATA -->
+        <!-- #   # user details
+        #   "first_name": { "type": "string" },
+        #   "last_name": { "type": "string" },
+        #   "email": { "type": "string" },
+        #   "phone": { "type": "number" },
+        #   "type": { "type": "number" },
+        #   # address info
+        #   "zip": { "type": "string" },
+        #   "city": { "type": "string" },
+        #   "province": { "type": "string" },
+        #   "building_number": { "type": "number" },
+        #   "unit_number": { "type": "number" },
+        #   "street_name": { "type": "string" },
+        #   # card number info
+        #   "card_number": { "type": "string" },
+        #   "expiration_date": { "type": "number" },  -->
+    <form action=""></form>
+
+    <h1>Register Restaurant</h1>
+    <!-- 
+    METADATA
+    "restaurant_manager_email": { "type": "string" },
+    "restaurant_name": { "type": "string" },
+    "cuisine": { "type": "string" }, 
+    -->
+    <form action="/register_restaurant" method="post" >
+        <label for="restaurant_name">Restaurant Name:</label><br>
+        <input type="text" id="restaurant_name" name="restaurant_name" value=""><br>
+        
+        <label for="restaurant_manager_email">Manager email (Must Already be a User): <label><br>
+        <input type="text" id="restaurant_manager_email" name="restaurant_manager_email" value=""><br><br>
+
+        <label for="cuisine">Cuisine:</label><br>
+        <input type="text" id="cuisine" name="cuisine" value=""><br><br>
+
+        <input type="submit" value="Submit">
+    </form>
+
+    <h1></h1>
+    <!-- TODO: A form to submit to insert_restaurant_item -->
+        <!-- # "item_name": { "type": "string" },
+        # "restaurant_name": { "type": "string" },
+        # "price": { "type": "number" }, -->
+
+    <h1></h1>
+    <!-- TODO: A form to submit to place_order -->
+        <!-- # "tip": { "type": "string" },
+        # "status": { "type": "string" },
+        # "special_instructions": { "type": "string" },
+        # "consumer_email": { "type": "string" },
+        # "restaurant_name": { "type": "string" },
+        # "item_name": { "type": "string" }, -->
+
+    <h1></h1>
+    <!-- TODO: A form to submit to rate_restaurant -->
+        <!-- # "tip": { "type": "string" },
+        # "restaurant": { "type": "string" },
+        # "user_email": { "type": "string" },
+        # "rating_time": { "type": "string" },
+        # "value": { "type": "string" },
+        # "review": { "type": "string" }, -->
+
+
+
+    
+<!-- Example:  -->
     <h1>Whats good babygirl</h1>
-    <form action="/action_page.php">
+    <form action="/register_restaurant">
         <label for="fname">First name:</label><br>
         <input type="text" id="fname" name="fname" value="John"><br>
         <label for="lname">Last name:</label><br>
         <input type="text" id="lname" name="lname" value="Doe"><br><br>
         <input type="submit" value="Submit">
       </form>
+
 </body>
 </html>

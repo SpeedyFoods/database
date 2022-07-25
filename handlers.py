@@ -2,6 +2,8 @@
 Has the functions that handle the API endpoints
 """
 import datetime
+from multiprocessing import managers
+from random import randint
 from db_client import db, cursor
 from queries.insert_queries import *
 from utils.helper import get_random_speeder_id_from_db, get_restaurant_id_by_name, get_user_id_by_email, split_card_number, value_exist_in_column
@@ -70,17 +72,27 @@ def register_restaurant(restaurant_detail):
     res['success'] = False
     res['error'] = "no errors"
     try:
+        # discuss: can one manger have multiple 
         manager_id = get_user_id_by_email(restaurant_detail['restaurant_manager_email'])
+        # manager_id = randint(100,999)
+
         if (manager_id == None):
+            # manager_id = randint(100,500)
             res['error'] = f"User with email {restaurant_detail['restaurant_manager_email']} does not Exist"
-        
-        print("1")
-        if (not value_exist_in_column('RestaurantParent', 'restaurant_name',restaurant_detail['restaurant_name'])):
+            res['success'] = False
+            print( f"User with email {restaurant_detail['restaurant_manager_email']} does not Exist")
+            return res
+        if (value_exist_in_column('Restaurant', 'restaurant_id', manager_id)):
+            res['error'] = f"This user is already managing a restaurant"
+            res['success'] = False
+            return res
+
+        if (not value_exist_in_column('RestaurantParent', 'restaurant_name', restaurant_detail['restaurant_name'])):
             insert_row("Restaurant Parent", insert_restaurant_parent_query,
                     (restaurant_detail['restaurant_name'], restaurant_detail['cuisine']))
         
-        print("2")
         insert_row("Restaurant", insert_restaurant_query, (manager_id, restaurant_detail['restaurant_name']))
+        return res
 
     except Exception as e:
         res['error'] = "Failed to insert user data" + str(e)
@@ -147,20 +159,38 @@ def rate_restaurant(user_detail):
 # --------------------------------------------------
 # Select queries here?
 
+from tabulate import tabulate
+
 def view_users():
     """
     goal is to return a list of user detail
     """
-    pass
+    cursor.execute("select * from User;")
+    myresult = cursor.fetchall()
+    html = tabulate(myresult, tablefmt='html')
+    print(html)
+    return html
 
 
 def view_restaurants():
-    pass
+    cursor.execute("select * from Restaurant;")
+    myresult = cursor.fetchall()
+    html = tabulate(myresult, tablefmt='html')
+    return html
 
+def view_restaurant_items(restaurant_name):
+    # check if restaurant exists, if not, return "Restaurant not in database"
+    cursor.execute(f"select * from Restaurant where restaurant_name = '{restaurant_name}';")
+    myresult = cursor.fetchall()
+    html = tabulate(myresult, tablefmt='html')
+    return html
 
-def view_restaurant_items():
-    pass
+    # else, return html
+    return "items table"
 
-# if __name__ == "__main__":
-    # insert_row("Order", insert_order_query,
-    #         (2,0 , datetime.datetime.now(), "thanks", 0, 0, get_random_speeder_id_from_db()))
+def view_orders():
+    # select all orders and return it
+    return "orders"
+
+if __name__ == "__main__":
+    view_restaurants()

@@ -7,7 +7,7 @@ from flask import request
 from flask_expects_json import expects_json
 from utils.create_tables import create_tables
 
-from handlers import insert_restaurant_item, register_user, register_restaurant, place_order, rate_restaurant
+from handlers import insert_restaurant_item, register_user, register_restaurant, place_order, rate_restaurant, view_orders, view_restaurant_items, view_restaurants, view_users
 from utils.insert_single_rows import insert_sample_rows
 
 app = Flask(__name__)
@@ -21,123 +21,106 @@ def hello_world():
             title="Home",
             description="Order Now!"
         )
+  
 
-Register_User_Schema = {
-  "type": "object",
-  "properties": {
-    # user details
-    "first_name": { "type": "string" },
-    "last_name": { "type": "string" },
-    "email": { "type": "string" },
-    "phone": { "type": "number" },
-    "type": { "type": "number" },
-    # address info
-    "zip": { "type": "string" },
-    "city": { "type": "string" },
-    "province": { "type": "string" },
-    "building_number": { "type": "number" },
-    "unit_number": { "type": "number" },
-    "street_name": { "type": "string" },
-    # card number info
-    "card_number": { "type": "string" },
-    "expiration_date": { "type": "number" }, 
-  },
-  "required": [
-    "first_name",
-    "last_name",
-    "email",
-    "phone",
-    "type",
-    "zip",
-    "building_number",
-    "unit_number",
-    "street_name",
-    "card_number",
-    "expiration_date",
-  ]
-}
-@app.route('/user_sign_up', methods=['POST'])
-@expects_json(Register_User_Schema)
+
+
+# EXPECTED VALUES FROM THE FORM
+  # "properties": {
+  #   # user details
+  #   "first_name": { "type": "string" },
+  #   "last_name": { "type": "string" },
+  #   "email": { "type": "string" },
+  #   "phone": { "type": "number" },
+  #   "type": { "type": "number" },
+  #   # address info
+  #   "zip": { "type": "string" },
+  #   "city": { "type": "string" },
+  #   "province": { "type": "string" },
+  #   "building_number": { "type": "number" },
+  #   "unit_number": { "type": "number" },
+  #   "street_name": { "type": "string" },
+  #   # card number info
+  #   "card_number": { "type": "string" },
+  #   "expiration_date": { "type": "number" }, 
+  # },
+@app.route('/user_sign_up', methods=['GET','POST'])
 def route_register_user():
-    user_details = request.get_json(force=True)
+    data =request.form.to_dict(flat=True)
     try:
-      result = register_user(user_details)
+      result = register_user(data)
       return result
     except Exception as e:
       print(e)
 
-Register_Restaurant_Schema = {
-  "type": "object",
-  "properties": {
-    "restaurant_manager_email": { "type": "string" },
-    "restaurant_name": { "type": "string" },
-    "cuisine": { "type": "string" },
-  },
-}
-@app.route('/register_restaurant', methods=['POST'])
-@expects_json(Register_Restaurant_Schema)
+# EXPECTED VALUES FROM THE FORM
+# "restaurant_manager_email": { "type": "string" },
+# "restaurant_name": { "type": "string" },
+# "cuisine": { "type": "string" },
+@app.route('/register_restaurant', methods=['GET','POST'])
 def route_register_restaurant():
-    restaurant_details = request.get_json(force=True)
-    register_restaurant(restaurant_details)
-    return restaurant_details
+    data =request.form.to_dict(flat=True)
+    print(data)
+    res = register_restaurant(data)
+    if not res['success']:
+      return res['error']
+    return 'success'
+  
 
-
-Restaurant_Item_Schema = {
-  "type": "object",
-  "properties": {
-    "item_name": { "type": "string" },
-    "restaurant_name": { "type": "string" },
-    "price": { "type": "number" },
-    "user_email": { "type": "string" },
-  },
-}
+# EXPECTED VALUES FROM THE FORM
+# "item_name": { "type": "string" },
+# "restaurant_name": { "type": "string" },
+# "price": { "type": "number" },
 @app.route('/insert_restaurant_item', methods=['POST'])
-@expects_json(Restaurant_Item_Schema)
 def route_restaurant_item():
-    restaurant_item = request.get_json(force=True)
-    insert_restaurant_item(restaurant_item)
-    return restaurant_item
+    data =request.form.to_dict(flat=True)
+    insert_restaurant_item(data)
+    return "Success"
 
-# Place an order
-# discuss: we have to think how we want our data
-Place_Order_Schema = {
-  "type": "object",
-  "properties": {
-    "tip": { "type": "string" },
-    "status": { "type": "string" },
-    "special_instructions": { "type": "string" },
-    "consumer_email": { "type": "string" },
-    "restaurant_name": { "type": "string" },
-    "item_name": { "type": "string" },
-  },
-}
+# EXPECTED VALUES FROM THE FORM
+# "tip": { "type": "string" },
+# "status": { "type": "string" },
+# "special_instructions": { "type": "string" },
+# "consumer_email": { "type": "string" },
+# "restaurant_name": { "type": "string" },
+# "item_name": { "type": "string" },
 @app.route('/place_order', methods=['POST'])
-@expects_json()
 def route_place_order():
-    order_details = request.get_json(force=True)
-    place_order(order_details)
-    return order_details
+    data =request.form.to_dict(flat=True)
+    place_order(data)
+    return data
 
 
-# Place an order
-Rate_Restaurant_Schema = {
-  "type": "object",
-  "properties": {
-    "tip": { "type": "string" },
-    "restaurant": { "type": "string" },
-    "user_email": { "type": "string" },
-    "rating_time": { "type": "string" },
-    "value": { "type": "string" },
-    "review": { "type": "string" },
-  },
-}
+# EXPECTED VALUES FROM THE FORM
 @app.route('/rate_restaurant', methods=['POST'])
-@expects_json()
 def route_rate_restaurant():
-    rating_details = request.get_json(force=True)
-    rate_restaurant(rating_details)
-    return rating_details
+    data =request.form.to_dict(flat=True)
+    rate_restaurant(data)
+    return data
 
+# discussion
+@app.route('/view_users', methods=['GET'])
+def route_view_users():
+    data = view_users()
+    return data
+
+# discussion
+@app.route('/view_restaurants', methods=['GET'])
+def route_view_restaurants():
+    data = view_restaurants()
+    return data
+
+@app.route('/view_restaurant_items', methods=['POST'])
+def rote_view_restaurant_items():
+    restaurant_name = request.form.to_dict(flat=True)['restaurant_name']
+    print(restaurant_name)
+    res = view_restaurant_items(restaurant_name)
+    return res
+
+@app.route('/view_orders', methods=['GET'])
+def route_view_orders():
+    data = view_orders()
+    return data
 
 # discussion
 @app.route('/reset_database', methods=['GET'])
