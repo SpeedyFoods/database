@@ -6,7 +6,7 @@ a file that helps us insert bulk data to our database using our main funcitons f
 from utils.fake_values import list_of_dishes, list_of_cuisine, restaurant_names, fake_names, email_providers, bc_cities, fake_street_names, bank_names, debit_credit, visa_mastercard
 from random import randint, choice
 from db_client import cursor
-from handlers import get_restaurant_id_by_name, insert_restaurant_item, insert_row, place_order, register_restaurant, register_user
+from handlers import get_restaurant_id_by_name, insert_restaurant_item, insert_row, place_order, register_restaurant, register_user, rate_restaurant
 from utils.helper import generate_fake_zip, get_random_item_from, get_random_item_from_restaurant, get_random_restaurant_from_db, get_random_user_email_from_db
 from queries.insert_queries import insert_speeder_query
 
@@ -72,14 +72,36 @@ def populate_place_order():
             'status': 0,
             'special_instructions': ["None", "please Include utensils"][randint(0, 1)],
             'consumer_email': get_random_user_email_from_db(),
-            'restaurant_name':restaurant_name,
+            'restaurant_name': restaurant_name,
             'item_name': get_random_item_from_restaurant(restaurant_name)
         }
         place_order(example_order)
 
 # TODO: Rithik
 def populate_rate_restaurant():
-    pass
+    # Refer to this
+    # CREATE TABLE UserToUser_Reviews (
+    #     user_id_ratable INTEGER,
+    #     user_id_consumer INTEGER NOT NULL,
+    #     rating_time TIMESTAMP,
+    #     value  INTEGER NOT NULL,
+    #     review TEXT,
+    #     PRIMARY KEY (user_id_ratable, user_id_consumer, rating_time),
+    #     FOREIGN KEY (User_id_consumer) REFERENCES User(user_id),
+    #     CHECK (value >= 1 AND value <= 5)
+
+    for i in range(10):
+        restaurant_name1 = get_random_restaurant_from_db()
+        rest_id1 = get_restaurant_id_by_name(restaurant_name1)
+        example_rating1 = {
+            'restaurant': rest_id1,
+            'cons_email1': get_random_user_email_from_db(),
+            'rating_time': 0,  # not sure how to get a random time stamp,
+            'value': randint(1, 5),
+            'review': ["None", "Very tasty food, speedy delivery"]  # not sure if this is how TEXT data type is done
+        }
+        rate_restaurant(example_rating1)
+    # pass
 
 
 def insert_random_data():
