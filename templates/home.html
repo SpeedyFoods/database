@@ -1,3 +1,7 @@
+<!-- TODO: 
+    - make user sign up form inputs have enough room for content, e.g email
+    - add proper/consistent spacing for label/input pairs
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,10 +11,6 @@
     <title>Document</title>
 </head>
 <body>
-
-    <!-- FORMS: -->
-    <!-- TODO: A form to submit to user_sign_up -->
-
     <!--  A button that shows a list of Users -->
     <form action="/view_users">
         <input type="submit" value="View Users" />
@@ -51,25 +51,29 @@
         #   "card_number": { "type": "string" },
         #   "expiration_date": { "type": "number" },  -->
     <form action="/user_sign_up" method="post">
-        <label for="first_name">First Name:</label><br>
-        <input type="text" id="first_name" name="first_name" value=""><br>
+        <fieldset>
+            <legend><strong>User details</strong></legend>
+            
+            <label for="first_name">First Name:</label><br>
+            <input type="text" id="first_name" name="first_name" placeholder="John" pattern="^\w+$" required><br>
 
-        <label for="last_name">Last name:</label><br>
-        <input type="text" id="last_name" name="last_name" value=""><br>
+            <label for="last_name">Last name:</label><br>
+            <input type="text" id="last_name" name="last_name" placeholder="Smith" pattern="^\w+$" required><br>
 
-        <label for="email">Email:</label><br>
-        <input type="text" id="email" name="email" value=""><br>
+            <label for="email">Email:</label><br>
+            <input type="email" id="email" name="email" placeholder="johnsmith@coldmail.com" required><br>
 
-        <label for="phone">Phone:</label><br>
-        <input type="text" id="phone" name="phone" value=""><br>
-
-        
+            <label for="phone">Phone:</label><br>
+            <input type="tel" id="phone" name="phone" placeholder="0001112222" value="" required><br>
+        </fieldset>
+        <br>
         <!-- https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio#defining_a_radio_group -->
         <!-- label *for* is for the id, input *name* is for HTTP request -->
         <fieldset>
-            <legend>User type</legend>
+            <legend><strong>User type</strong></legend>
+            
             <label for="consumer">Consumer</label>
-            <input type="radio" id="consumer" name="user_type" value="0"><br>
+            <input type="radio" id="consumer" name="user_type" value="0" checked><br>
 
             <label for="restaurant_manager">Restaurant Manager</label>
             <input type="radio" id="restaurant_manager" name="user_type" value="1"><br>
@@ -77,6 +81,42 @@
             <label for="speeder">Speeder</label>
             <input type="radio" id="speeder" name="user_type" value="2"><br>
         </fieldset>
+        <br>
+        <fieldset>
+            <legend><strong>Address Info</strong></legend>
+            
+            <label for="zip">Zip:</label><br>
+            <input type="text" id="zip" name="zip" minlength="7" maxlength="7" placeholder="A1B C2D" pattern="^\w\d\w\s\d\w\d$" required><br> 
+            
+            <label for="city">City:</label><br>
+            <input type="text" name="city" id="city" placeholder="Ottawa" pattern="^\w+$" required><br>
+
+            <label for="province">Province:</label><br>
+            <input type="text" name="province" id="province" placeholder="ON" maxlength="2" required><br>
+
+            <label for="building_number">Building Number:</label>
+            <input type="number" name="building_number" id="building_number" placeholder="1234" required><br>
+
+            <!-- Not required! possible not to live in appt. -->
+            <label for="unit_number">Unit Number:</label>
+            <input type="number" name="unit_number" id="unit_number" placeholder="12"><br>
+
+            <label for="street_name">Street Name:</label>
+            <input type="text" name="street_name" id="street_name" pattern="\w+ \w+" placeholder="Watercress Street" required><br>
+        </fieldset>
+        <br>
+        <fieldset>
+            <legend><strong>Paymend Card Info:</strong></legend>
+            
+            <!-- https://stackoverflow.com/questions/48534229/what-is-the-correct-input-type-for-credit-card-numbers -->
+            <label for="card_number">Card Number:</label>
+            <input type="tel" name="card_number" id="card_number" pattern="[0-9\s]{13,19}" placeholder="1111 2222 3333 4444">
+
+            <label for="expiration_date">Expiration Date:</label>
+            <input type="text" pattern="^\d\d\/\d\d$" placeholder="11/22">
+        </fieldset>
+        <br>
+        <input type="submit" value="Submit">
     </form>
 
     <h1>Register Restaurant</h1>
