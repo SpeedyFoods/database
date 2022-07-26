@@ -96,9 +96,9 @@ def populate_rate_restaurant():
         example_rating1 = {
             'restaurant': rest_id1,
             'cons_email1': get_random_user_email_from_db(),
-            # 'rating_time': not sure how to get a random time stamp,
+            'rating_time': 0,  # not sure how to get a random time stamp,
             'value': randint(1, 5),
-            'review': ["None", "Very tasty food, speedy delivery"]
+            'review': ["None", "Very tasty food, speedy delivery"]  # not sure if this is how TEXT data type is done
         }
         rate_restaurant(example_rating1)
     # pass

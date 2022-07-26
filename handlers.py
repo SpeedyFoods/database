@@ -31,7 +31,7 @@ def register_user(user_detail):
 
     try:
         # INSERT USER
-        insert_row("User", insert_user_query, (user_detail['first_name'], 
+        insert_row("User", insert_user_query, (user_detail['first_name'],
             user_detail['last_name'], user_detail['email'], user_detail['phone'], user_detail['type']))
 
         user_id = get_user_id_by_email(user_detail['email'])
@@ -43,19 +43,19 @@ def register_user(user_detail):
         if (not value_exist_in_column("Zip", 'zip', user_detail['zip'])):
             insert_row("Zip", insert_zip_query, (user_detail['zip'], user_detail['city']))
 
-        insert_row("Address", insert_user_address_query, (user_id, user_detail['zip'], user_detail['building_number'], 
+        insert_row("Address", insert_user_address_query, (user_id, user_detail['zip'], user_detail['building_number'],
             user_detail['unit_number'], user_detail['street_name']))
 
         # remember to validate cardnumber has 16 digits
         [card_number_6,card_number_rest] = split_card_number(user_detail['card_number'])
 
         if (not value_exist_in_column('Card_BIN', 'card_number_6', card_number_6)):
-            insert_row("Card_BIN", insert_card_bin_query, (card_number_6, 
+            insert_row("Card_BIN", insert_card_bin_query, (card_number_6,
                 user_detail['bank_name'], user_detail['card_type'],
                 user_detail['payment_system']))
 
-        insert_row("Card_All", insert_card_all_query, (card_number_6, 
-            card_number_rest, user_detail['expiration_date'], 
+        insert_row("Card_All", insert_card_all_query, (card_number_6,
+            card_number_rest, user_detail['expiration_date'],
             user_detail['zip'], user_id))
 
         res['success'] = True
@@ -91,7 +91,7 @@ def register_restaurant(restaurant_detail):
         if (not value_exist_in_column('RestaurantParent', 'restaurant_name', restaurant_detail['restaurant_name'])):
             insert_row("Restaurant Parent", insert_restaurant_parent_query,
                     (restaurant_detail['restaurant_name'], restaurant_detail['cuisine']))
-        
+
         insert_row("Restaurant", insert_restaurant_query, (manager_id, restaurant_detail['restaurant_name']))
         return res
 
@@ -128,7 +128,7 @@ def place_order(order_detail):
 
         order_id = insert_row("_Order", insert_order_query,
                 (order_detail['tip'],0 , datetime.datetime.now(), order_detail['special_instructions'], consumer_id, restaurant_id, get_random_speeder_id_from_db()))
-            
+
         insert_row("Order to Item", insert_order_to_item_query,
                     (order_id, restaurant_id, order_detail['item_name']))
     except Exception as e:
@@ -138,7 +138,7 @@ def place_order(order_detail):
         return res
 
 def rate_restaurant(user_detail):
-    
+
     # insert_user_to_user_reviews_query = """
     # INSERT INTO UserToUser_Reviews (
     # user_id_ratable, 
@@ -152,10 +152,11 @@ def rate_restaurant(user_detail):
     # remember to implement try catch
     # find the user id ratable by doing a select search statemet
     user_id_ratable = user_detail['restaurant']
+    consumer_id1 = get_user_id_by_email(user_detail['cons_email1'])
     # find the user_id_consumer ratable by doing a select search statemet
 
-    insert_row("user to user reviews", insert_user_to_user_reviews_query, (user_id_ratable, 
-                user_detail['c'], user_detail['c'], user_detail[''], user_detail['c']))
+    insert_row("user to user reviews", insert_user_to_user_reviews_query, (user_id_ratable,
+                consumer_id1, user_detail['rating_time'], user_detail['value'], user_detail['review']))
 
 # --------------------------------------------------
 # Select queries here?
