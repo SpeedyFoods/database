@@ -180,13 +180,14 @@ def view_restaurants():
 
 def view_restaurant_items(restaurant_name):
     # check if restaurant exists, if not, return "Restaurant not in database"
-    cursor.execute(f"select * from Restaurant where restaurant_name = '{restaurant_name}';")
+    # cursor.execute(f"select * from Restaurant where restaurant_name = '{restaurant_name}';")
+    cursor.execute(f"select * from Restaurant, Item where restaurant_name = '{restaurant_name}' and Restaurant.restaurant_id = Item.restaurant_id;")
     myresult = cursor.fetchall()
     html = tabulate(myresult, tablefmt='html')
     return html
 
     # else, return html
-    return "items table"
+    # return "items table"
 
 def view_orders():
     # select all orders and return it
