@@ -190,7 +190,11 @@ def view_restaurant_items(restaurant_name):
 
 def view_orders():
     # select all orders and return it
-    return "orders"
+    cursor.execute("select * from _Order;")
+    myresult = cursor.fetchall()
+    html = tabulate(myresult, tablefmt='html')
+    return html
+    # return "orders"
 
 if __name__ == "__main__":
     view_restaurants()
