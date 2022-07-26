@@ -7,6 +7,7 @@ from random import randint
 from db_client import db, cursor
 from queries.insert_queries import *
 from utils.helper import get_random_speeder_id_from_db, get_restaurant_id_by_name, get_user_id_by_email, split_card_number, value_exist_in_column
+from tabulate import tabulate
 
 
 def insert_row(query_name, insert_query, insert_tuple):
@@ -158,8 +159,6 @@ def rate_restaurant(user_detail):
 
 # --------------------------------------------------
 # Select queries here?
-
-from tabulate import tabulate
 
 def view_users():
     """

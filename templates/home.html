@@ -50,7 +50,34 @@
         #   # card number info
         #   "card_number": { "type": "string" },
         #   "expiration_date": { "type": "number" },  -->
-    <form action=""></form>
+    <form action="/user_sign_up" method="post">
+        <label for="first_name">First Name:</label><br>
+        <input type="text" id="first_name" name="first_name" value=""><br>
+
+        <label for="last_name">Last name:</label><br>
+        <input type="text" id="last_name" name="last_name" value=""><br>
+
+        <label for="email">Email:</label><br>
+        <input type="text" id="email" name="email" value=""><br>
+
+        <label for="phone">Phone:</label><br>
+        <input type="text" id="phone" name="phone" value=""><br>
+
+        
+        <!-- https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio#defining_a_radio_group -->
+        <!-- label *for* is for the id, input *name* is for HTTP request -->
+        <fieldset>
+            <legend>User type</legend>
+            <label for="consumer">Consumer</label>
+            <input type="radio" id="consumer" name="user_type" value="0"><br>
+
+            <label for="restaurant_manager">Restaurant Manager</label>
+            <input type="radio" id="restaurant_manager" name="user_type" value="1"><br>
+
+            <label for="speeder">Speeder</label>
+            <input type="radio" id="speeder" name="user_type" value="2"><br>
+        </fieldset>
+    </form>
 
     <h1>Register Restaurant</h1>
     <!-- 
@@ -100,6 +127,7 @@
 
     
 <!-- Example:  -->
+    <!--
     <h1>Whats good babygirl</h1>
     <form action="/register_restaurant">
         <label for="fname">First name:</label><br>
@@ -108,6 +136,6 @@
         <input type="text" id="lname" name="lname" value="Doe"><br><br>
         <input type="submit" value="Submit">
       </form>
-
+    -->
 </body>
 </html>
