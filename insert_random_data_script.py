@@ -10,6 +10,7 @@ from handlers import get_restaurant_id_by_name, insert_restaurant_item, insert_r
 from utils.helper import generate_fake_zip, get_random_item_from, get_random_item_from_restaurant, get_random_restaurant_from_db, get_random_user_email_from_db
 from queries.insert_queries import insert_speeder_query
 
+
 def populate_register_user():
     """
     insert 10 random user data information to the tables User, Address, Zip, Card_BIN, Card_All
@@ -44,6 +45,7 @@ def populate_register_speeder():
         except:
             pass
 
+
 def populate_register_restaurant():
     for i in range(len(restaurant_names)):
 
@@ -54,6 +56,7 @@ def populate_register_restaurant():
         }
         register_restaurant(register_restaurant_detail)
 
+
 def populate_insert_restaurant_item():
     for i in range(50):
         item_details = {
@@ -63,6 +66,7 @@ def populate_insert_restaurant_item():
             'user_email': get_random_user_email_from_db()
         }
         insert_restaurant_item(item_details)
+
 
 def populate_place_order():
     for i in range(10):
@@ -78,6 +82,8 @@ def populate_place_order():
         place_order(example_order)
 
 # TODO: Rithik
+
+
 def populate_rate_restaurant():
     # Refer to this
     # CREATE TABLE UserToUser_Reviews (
@@ -90,6 +96,8 @@ def populate_rate_restaurant():
     #     FOREIGN KEY (User_id_consumer) REFERENCES User(user_id),
     #     CHECK (value >= 1 AND value <= 5)
 
+    # review
+    reviews = ["Pretty Bad", "Very tasty food, speedy delivery"]
     for i in range(10):
         restaurant_name1 = get_random_restaurant_from_db()
         rest_id1 = get_restaurant_id_by_name(restaurant_name1)
@@ -98,10 +106,9 @@ def populate_rate_restaurant():
             'cons_email1': get_random_user_email_from_db(),
             'rating_time': 0,  # not sure how to get a random time stamp,
             'value': randint(1, 5),
-            'review': ["None", "Very tasty food, speedy delivery"]  # not sure if this is how TEXT data type is done
+            'review': reviews[randint(0, 1)]
         }
         rate_restaurant(example_rating1)
-    # pass
 
 
 def insert_random_data():
@@ -117,4 +124,4 @@ if __name__ == "__main__":
     """
     The order of which we want to populate the tables
     """
-    insert_random_data()
+    # insert_random_data()

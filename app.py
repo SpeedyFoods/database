@@ -94,7 +94,7 @@ def route_place_order():
 # EXPECTED VALUES FROM THE FORM
 @app.route('/rate_restaurant', methods=['POST'])
 def route_rate_restaurant():
-    data =request.form.to_dict(flat=True)
+    data = request.form.to_dict(flat=True)
     rate_restaurant(data)
     return data
 

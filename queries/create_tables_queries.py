@@ -77,7 +77,7 @@ create_user_to_user_table_query = '''
 CREATE TABLE UserToUser_Reviews (
     user_id_ratable INTEGER, 
     user_id_consumer INTEGER NOT NULL, 
-    rating_time TIMESTAMP,
+    rating_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     value  INTEGER NOT NULL,
     review TEXT,
     PRIMARY KEY (user_id_ratable, user_id_consumer, rating_time),

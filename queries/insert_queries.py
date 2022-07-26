@@ -62,11 +62,10 @@ insert_user_to_user_reviews_query = """
 INSERT INTO UserToUser_Reviews (
 	user_id_ratable, 
 	user_id_consumer, 
-	rating_time,
 	value,
 	review
 )
-VALUES (%s, %s, %s, %s, %s)
+VALUES (%s, %s, %s, %s)
 """
 
 insert_speeder_query = """

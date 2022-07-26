@@ -28,11 +28,12 @@ def register_user(user_detail):
     res = {}
     res['success'] = False
     res['error'] = "no errors"
-
+    
+    # print("VALUEEEE",(user_detail))
     try:
         # INSERT USER
         insert_row("User", insert_user_query, (user_detail['first_name'],
-            user_detail['last_name'], user_detail['email'], user_detail['phone'], user_detail['type']))
+            user_detail['last_name'], user_detail['email'], user_detail['phone'], int(user_detail['user_type'])))
 
         user_id = get_user_id_by_email(user_detail['email'])
 
@@ -47,16 +48,16 @@ def register_user(user_detail):
             user_detail['unit_number'], user_detail['street_name']))
 
         # remember to validate cardnumber has 16 digits
-        [card_number_6,card_number_rest] = split_card_number(user_detail['card_number'])
+        # [card_number_6,card_number_rest] = split_card_number(user_detail['card_number'])
 
-        if (not value_exist_in_column('Card_BIN', 'card_number_6', card_number_6)):
-            insert_row("Card_BIN", insert_card_bin_query, (card_number_6,
-                user_detail['bank_name'], user_detail['card_type'],
-                user_detail['payment_system']))
+        # if (not value_exist_in_column('Card_BIN', 'card_number_6', card_number_6)):
+        #     insert_row("Card_BIN", insert_card_bin_query, (card_number_6,
+        #         user_detail['bank_name'], user_detail['card_type'],
+        #         user_detail['payment_system']))
 
-        insert_row("Card_All", insert_card_all_query, (card_number_6,
-            card_number_rest, user_detail['expiration_date'],
-            user_detail['zip'], user_id))
+        # insert_row("Card_All", insert_card_all_query, (card_number_6,
+        #     card_number_rest, user_detail['expiration_date'],
+        #     user_detail['zip'], user_id))
 
         res['success'] = True
         return res
@@ -156,7 +157,7 @@ def rate_restaurant(user_detail):
     # find the user_id_consumer ratable by doing a select search statemet
 
     insert_row("user to user reviews", insert_user_to_user_reviews_query, (user_id_ratable,
-                consumer_id1, user_detail['rating_time'], user_detail['value'], user_detail['review']))
+                consumer_id1, user_detail['value'], user_detail['review']))
 
 # --------------------------------------------------
 # Select queries here?
