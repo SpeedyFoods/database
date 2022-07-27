@@ -49,7 +49,7 @@ CREATE TABLE User (
     user_id int AUTO_INCREMENT,
     first_name CHAR(20) NOT NULL,
     last_name CHAR(20) NOT NULL,
-    email CHAR(30) NOT NULL,
+    email CHAR(30) NOT NULL UNIQUE,
     phone CHAR(20) NOT NULL,
     type int NOT NULL,
     PRIMARY KEY (user_id),
