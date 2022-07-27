@@ -1,0 +1,113 @@
+{% extends "common.html" %}
+{% block inside %}
+
+<h1>Register User</h1>
+<form action="/user_sign_up" method="post">
+    <fieldset>
+        <legend><strong>User Details</strong></legend>
+        <div>
+            <label for="first_name">First Name</label><br>
+            <input type="text" id="first_name" name="first_name" placeholder="John" pattern="^\w+$" required><br>
+        </div>
+        <div>
+            <label for="last_name">Last name</label><br>
+            <input type="text" id="last_name" name="last_name" placeholder="Smith" pattern="^\w+$" required><br>
+        </div>
+        <div>
+            <label for="email">Email</label><br>
+            <input type="email" id="email" name="email" placeholder="johnsmith@coldmail.com" required><br>
+        </div>
+        <div>
+            <label for="phone">Phone</label><br>
+            <input type="tel" id="phone" name="phone" placeholder="0001112222" value="" required><br>
+        </div>
+    </fieldset>
+    <br>
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio#defining_a_radio_group -->
+    <!-- label *for* is for the id, input *name* is for HTTP request -->
+    <fieldset>
+        <legend><strong>User type</strong></legend>
+
+        <label for="consumer">Consumer</label>
+        <input type="radio" id="consumer" name="type" value="0" checked><br>
+
+        <label for="restaurant_manager">Restaurant Manager</label>
+        <input type="radio" id="restaurant_manager" name="type" value="1"><br>
+
+        <label for="speeder">Speeder</label>
+        <input type="radio" id="speeder" name="type" value="2"><br>
+    </fieldset>
+    <br>
+    <fieldset>
+        <legend><strong>Address Info</strong></legend>
+        <div>
+            <label for="zip">Zip</label><br>
+            <input type="text" id="zip" name="zip" minlength="7" maxlength="7" placeholder="A1B C2D"
+                pattern="^\w\d\w\s\d\w\d$" required><br>
+        </div>
+        <div>
+            <label for="city">City</label><br>
+            <input type="text" name="city" id="city" placeholder="Ottawa" pattern="^\w+$" required><br>
+        </div>
+        <div>
+            <label for="province">Province</label><br>
+            <input type="text" name="province" id="province" placeholder="ON" maxlength="2" required><br>
+        </div>
+        <div>
+            <label for="building_number">Building Number</label><br>
+            <input type="number" name="building_number" id="building_number" placeholder="1234" required><br>
+        </div>
+        <div>
+            <!-- Not required! possible not to live in appt. -->
+            <label for="unit_number">Unit Number</label><br>
+            <input type="number" name="unit_number" id="unit_number" placeholder="12"><br>
+        </div>
+        <div>
+            <label for="street_name">Street Name</label><br>
+            <input type="text" name="street_name" id="street_name" pattern="\w+ \w+" placeholder="Watercress Street"
+                required><br>
+        </div>
+    </fieldset>
+    <br>
+    <fieldset>
+        <legend><strong>Payment Card Info</strong></legend>
+        <div>
+            <label for="bank_name">Bank Name</label><br>
+            <select name="bank_name" id="bank_name">
+                {% for bank in bank_names %}
+                <option value="{{ bank }}">{{ bank }}</option>
+                {% endfor %}
+            </select>
+
+            <!-- <input type="" id="bank_name" name="bank_name" required> -->
+        </div>
+        <div>
+            <label for="card_type">Card Type</label><br>
+            <select name="card_type" id="card_type">
+                <option value="visa">Visa</option>
+                <option value="mastercard">Mastercard</option>
+            </select>
+        </div>
+        <div>
+            <label for="payment_system">Payment System</label><br>
+            <select name="payment_system" id="payment_system">
+                <option value="credit">Credit</option>
+                <option value="debit">Debit</option>
+            </select>
+        </div>
+        <div>
+            <!-- https://stackoverflow.com/questions/48534229/what-is-the-correct-input-type-for-credit-card-numbers -->
+            <label for="card_number">Card Number</label><br>
+            <input type="tel" name="card_number" id="card_number" pattern="[0-9\s]{13,19}"
+                placeholder="1111 2222 3333 4444">
+        </div>
+        <div>
+            <label for="expiration_date">Expiration Date</label><br>
+            <input type="text" pattern="^\d\d\/\d\d$" id="expiration_date" name="expiration_date" placeholder="11/22">
+        </div>
+    </fieldset>
+    <br>
+    <input type="submit" value="Register User">
+</form>
+
+{% endblock %}

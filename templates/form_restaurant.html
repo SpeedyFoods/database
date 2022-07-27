@@ -1,0 +1,19 @@
+{% extends "common.html" %}
+{% block inside %}
+<h1>Register Restaurant</h1>
+<form action="/register_restaurant" method="post">
+  <div>
+    <label for="restaurant_name">Restaurant Name</label><br>
+    <input type="text" id="restaurant_name" name="restaurant_name" value="">
+  </div>
+  <div>
+    <label for="restaurant_manager_email">Manager email (must already be a user)</label><br>
+    <input type="text" id="restaurant_manager_email" name="restaurant_manager_email" value="">
+  </div>
+  <div>
+    <label for="cuisine">Cuisine</label><br>
+    <input type="text" id="cuisine" name="cuisine" value="">
+  </div>
+  <input type="submit" value="Register Restaurant">
+</form>
+{% endblock %}

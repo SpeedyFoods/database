@@ -1,0 +1,19 @@
+{% extends "common.html" %}
+{% block inside %}
+<h1>Insert Restaurant Item</h1>
+<form action="/insert_restaurant_item" method="post">
+  <div>
+    <label for="item_name">Item Name</label><br>
+    <input type="text" name="item_name" id="item_name" placeholder="Caesar Salad" required>
+  </div>
+  <div>
+    <label for="restaurant_name">Restaurant Name</label><br>
+    <input type="text" name="restaurant_name" id="restaurant_name" placeholder="Dimitris Greek Food" required>
+  </div>
+  <div>
+    <label for="price">Price (dollars)</label><br>
+    <input type="number" name="price" id="price" step="0.01" placeholder="12.5" required>
+  </div>
+  <input type="submit" value="Insert Restaurant Item">
+</form>
+{% endblock %}

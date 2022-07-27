@@ -1,13 +1,15 @@
 body {
   background-color: rgb(222, 249, 253);
 }
+
 .large-section {
   border: 0.25rem solid rgb(0, 191, 255);
   padding: 2rem;
   padding-top: 1rem;
   margin: 2rem;
-  background-color: white;
+  background-color: rgb(250, 248, 248);
 }
+
 form div {
   margin-bottom: 1.2rem;
 }

@@ -19,13 +19,30 @@ from db_client import db, cursor
 @app.route('/')
 def hello_world():
     return render_template(
-            'home.html',
+            'home.html'
+        )
+
+# ---------- Showing forms----------- #
+@app.route('/form_user')
+def form_user():
+    return render_template(
+            'form_user.html',
             bank_names=bank_names
         )
-  
 
+@app.route('/form_restaurant')
+def form_restaurant():
+    return render_template(
+            'form_restaurant.html',
+        )
 
-
+@app.route('/form_item')
+def form_item():
+    return render_template(
+            'form_item.html',
+        )
+# ------------------------------------ #
+ 
 # EXPECTED VALUES FROM THE FORM
   # "properties": {
   #   # user details
