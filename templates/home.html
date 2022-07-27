@@ -169,7 +169,6 @@
     </div>
     
 
-    <h1>Register Restaurant</h1>
     <!-- 
     METADATA (reference the keys for this object): 
     register_restaurant_detail = {
@@ -178,18 +177,25 @@
         "cuisine": get_random_item_from(list_of_cuisine),
     }
     -->
-    <form action="/register_restaurant" method="post" >
-        <label for="restaurant_name">Restaurant Name:</label><br>
-        <input type="text" id="restaurant_name" name="restaurant_name" value=""><br>
-        
-        <label for="restaurant_manager_email">Manager email (Must Already be a User): <label><br>
-        <input type="text" id="restaurant_manager_email" name="restaurant_manager_email" value=""><br><br>
-
-        <label for="cuisine">Cuisine:</label><br>
-        <input type="text" id="cuisine" name="cuisine" value=""><br><br>
-
-        <input type="submit" value="Submit">
-    </form>
+    <div class="large-section">
+        <h1>Register Restaurant</h1>
+        <form action="/register_restaurant" method="post" >
+            <div>
+                <label for="restaurant_name">Restaurant Name:</label><br>
+                <input type="text" id="restaurant_name" name="restaurant_name" value="">
+            </div>
+            <div>
+                <label for="restaurant_manager_email">Manager email (Must Already be a User): </label><br>
+                <input type="text" id="restaurant_manager_email" name="restaurant_manager_email" value="">
+            </div>
+            <div>
+                <label for="cuisine">Cuisine:</label><br>
+                <input type="text" id="cuisine" name="cuisine" value="">
+            </div>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+    
 
     <h1></h1>
     <!-- TODO: A form to submit to insert_restaurant_item -->
