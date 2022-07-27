@@ -41,7 +41,7 @@ def get_random_restaurant_from_db():
 
 
 def split_card_number(card_number):
-    return [card_number[0:5], card_number[5:]]
+    return [card_number[:6], card_number[6:]]
 
 def get_user_id_by_email(email):
     cursor.execute(f"SELECT user_id FROM User WHERE email = '{email}'")

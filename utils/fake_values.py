@@ -88,14 +88,14 @@ fake_emails = [
 ]
 
 bank_names = [
-    "Toronto-Dominion Bank.",
-    "Royal Bank of Canada.",
-    "Bank of Nova Scotia.",
-    "Bank of Montreal.",
-    "CIBC.",
-    "Desjardins Group.",
-    "National Bank.",
-    "HSBC Bank.",
+    "Toronto-Dominion Bank",
+    "Royal Bank of Canada",
+    "Bank of Nova Scotia",
+    "Bank of Montreal",
+    "CIBC",
+    "Desjardins Group",
+    "National Bank",
+    "HSBC",
 ]
 
 email_providers = [

@@ -10,6 +10,8 @@ from utils.create_tables import create_tables
 from handlers import insert_restaurant_item, register_user, register_restaurant, place_order, rate_restaurant, view_orders, view_restaurant_items, view_restaurants, view_users
 from utils.insert_single_rows import insert_sample_rows
 
+from utils.fake_values import bank_names
+
 app = Flask(__name__)
 
 from db_client import db, cursor
@@ -18,8 +20,7 @@ from db_client import db, cursor
 def hello_world():
     return render_template(
             'home.html',
-            title="Home",
-            description="Order Now!"
+            bank_names=bank_names
         )
   
 

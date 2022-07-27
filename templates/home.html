@@ -1,6 +1,4 @@
 <!-- TODO: 
-    - should payment_system and bank_name be enums
-        - standardized place for lists of names (used by random gen as well)
     - get card expiry date working: 11/22 -> SQL date
 -->
 <!DOCTYPE html>
@@ -25,7 +23,7 @@
             margin-bottom: 1.2rem;
         }
 
-        form input {
+        form input, form select {
             margin-top: 0.25rem;
             font-family: 'Times New Roman', Times, serif;
         }
@@ -110,13 +108,13 @@
                 <legend><strong>User type</strong></legend>
                 
                 <label for="consumer">Consumer</label>
-                <input type="radio" id="consumer" name="user_type" value="0" checked><br>
+                <input type="radio" id="consumer" name="type" value="0" checked><br>
     
                 <label for="restaurant_manager">Restaurant Manager</label>
-                <input type="radio" id="restaurant_manager" name="user_type" value="1"><br>
+                <input type="radio" id="restaurant_manager" name="type" value="1"><br>
     
                 <label for="speeder">Speeder</label>
-                <input type="radio" id="speeder" name="user_type" value="2"><br>
+                <input type="radio" id="speeder" name="type" value="2"><br>
             </fieldset>
             <br>
             <fieldset>
@@ -152,15 +150,27 @@
                 <legend><strong>Payment Card Info</strong></legend>
                 <div>
                     <label for="bank_name">Bank Name</label><br>
-                    <input type="text" id="bank_name" name="bank_name" required>
+                    <select name="bank_name" id="bank_name">
+                        {% for bank in bank_names %}
+                            <option value="{{ bank }}">{{ bank }}</option>
+                        {% endfor %}
+                    </select>
+                    
+                    <!-- <input type="" id="bank_name" name="bank_name" required> -->
                 </div>
                 <div>
                     <label for="card_type">Card Type</label><br>
-                    <input type="text" id="card_type" name="card_type" required>
+                    <select name="card_type" id="card_type">
+                        <option value="visa">Visa</option>
+                        <option value="mastercard">Mastercard</option>
+                    </select>
                 </div>
                 <div>
                     <label for="payment_system">Payment System</label><br>
-                    <input type="text" id="payment_system" name="payment_system" required>
+                    <select name="payment_system" id="payment_system">
+                        <option value="credit">Credit</option>
+                        <option value="debit">Debit</option>
+                    </select>
                 </div>
                 <div>
                     <!-- https://stackoverflow.com/questions/48534229/what-is-the-correct-input-type-for-credit-card-numbers -->
