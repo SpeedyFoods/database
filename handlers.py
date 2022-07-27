@@ -109,7 +109,7 @@ def insert_restaurant_item(register_item_detail):
     res['error'] = "no errors"
     try:
         restaurant_id = get_restaurant_id_by_name(register_item_detail['restaurant_name'])
-        insert_row("Item", insert_item_query, (register_item_detail['item_name'], restaurant_id, register_item_detail['item_name']))
+        insert_row("Item", insert_item_query, (register_item_detail['item_name'], restaurant_id, register_item_detail['price']))
     except Exception as e:
         res['error'] = "Failed to insert user data" + str(e)
         print("Failed to insert restaurant item")
