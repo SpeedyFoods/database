@@ -1,0 +1,22 @@
+body {
+  background-color: rgb(222, 249, 253);
+}
+.large-section {
+  border: 0.25rem solid rgb(0, 191, 255);
+  padding: 2rem;
+  padding-top: 1rem;
+  margin: 2rem;
+  background-color: white;
+}
+form div {
+  margin-bottom: 1.2rem;
+}
+
+form input, form select {
+  margin-top: 0.25rem;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+form input:not(input[type="radio"]):not(input[type="submit"]) {
+  min-width: 12rem;
+}
