@@ -1,6 +1,7 @@
 <!-- TODO: 
-    - make user sign up form inputs have enough room for content, e.g email
-    - add proper/consistent spacing for label/input pairs
+    - should payment_system and bank_name be enums
+        - standardized place for lists of names (used by random gen as well)
+    - get card expiry date working: 11/22 -> SQL date
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -11,7 +12,7 @@
     <title>Document</title>
     <style>
         .large-section {
-            border: 0.25rem inset gray;
+            border: 0.25rem solid rgb(130, 184, 100);
             padding: 2rem;
             margin: 2rem;
         }
@@ -21,6 +22,10 @@
 
         form input {
             margin-top: 0.25rem;
+        }
+
+        form input:not(input[type="radio"]):not(input[type="submit"]) {
+            min-width: 12rem;
         }
     </style>
 </head>
@@ -68,7 +73,7 @@
         <h1>Register User</h1>
         <form action="/user_sign_up" method="post">
             <fieldset>
-                <legend><strong>User details</strong></legend>
+                <legend><strong>User Details</strong></legend>
                 <div>
                     <label for="first_name">First Name:</label><br>
                     <input type="text" id="first_name" name="first_name" placeholder="John" pattern="^\w+$" required><br>
@@ -134,13 +139,25 @@
             <fieldset>
                 <legend><strong>Payment Card Info:</strong></legend>
                 <div>
+                    <label for="bank_name">Bank Name:</label><br>
+                    <input type="text" id="bank_name" name="bank_name" required>
+                </div>
+                <div>
+                    <label for="card_type">Card Type:</label><br>
+                    <input type="text" id="card_type" name="card_type" required>
+                </div>
+                <div>
+                    <label for="payment_system">Payment System:</label><br>
+                    <input type="text" id="payment_system" name="payment_system" required>
+                </div>
+                <div>
                     <!-- https://stackoverflow.com/questions/48534229/what-is-the-correct-input-type-for-credit-card-numbers -->
                     <label for="card_number">Card Number:</label><br>
                     <input type="tel" name="card_number" id="card_number" pattern="[0-9\s]{13,19}" placeholder="1111 2222 3333 4444">
                 </div>
                 <div>
                     <label for="expiration_date">Expiration Date:</label><br>
-                    <input type="text" pattern="^\d\d\/\d\d$" placeholder="11/22">
+                    <input type="text" pattern="^\d\d\/\d\d$" id="expiration_date" name="expiration_date" placeholder="11/22">
                 </div>
             </fieldset>
             <br>

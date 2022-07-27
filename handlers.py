@@ -29,10 +29,13 @@ def register_user(user_detail):
     res['success'] = False
     res['error'] = "no errors"
 
+    # ! Debug
+    print('user_detail', user_detail)
+    
     try:
         # INSERT USER
         insert_row("User", insert_user_query, (user_detail['first_name'],
-            user_detail['last_name'], user_detail['email'], user_detail['phone'], user_detail['type']))
+            user_detail['last_name'], user_detail['email'], user_detail['phone'], user_detail['user_type']))
 
         user_id = get_user_id_by_email(user_detail['email'])
 
