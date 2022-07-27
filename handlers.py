@@ -173,7 +173,6 @@ def view_users():
     cursor.execute("select * from User;")
     myresult = cursor.fetchall()
     html = tabulate(myresult, tablefmt='html')
-    print(html)
     return html
 
 
