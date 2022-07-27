@@ -38,7 +38,7 @@ def insert_sample_rows():
                 ("tomi","Liu", "tomi@gmail.com", "7786966999", 0))
 
     insert_test("User to User reviews", insert_user_to_user_reviews_query,
-                (user_id, user_id, datetime.now(), 5, "very tasty food!!"))
+                (user_id, user_id, 5, "very tasty food!!"))
 
     insert_test("User Address", insert_user_address_query,
                 (user_id, fake_zip, 33, 12, "Cambie st"))

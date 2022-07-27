@@ -50,6 +50,11 @@
         <input type="submit" value="View orders" />
     </form>
 
+    <!-- Rithik -->
+    <!-- TODO: A button that USES DIVISION -->
+
+
+    <h1>Register User</h1>
     <!-- A form to register a user -->
     <!-- METADATA -->
         <!-- #   # user details
@@ -168,10 +173,12 @@
 
     <h1>Register Restaurant</h1>
     <!-- 
-    METADATA
-    "restaurant_manager_email": { "type": "string" },
-    "restaurant_name": { "type": "string" },
-    "cuisine": { "type": "string" }, 
+    METADATA (reference the keys for this object): 
+    register_restaurant_detail = {
+        "restaurant_manager_email": get_random_user_email_from_db(),
+        "restaurant_name": restaurant_names[i],
+        "cuisine": get_random_item_from(list_of_cuisine),
+    }
     -->
     <form action="/register_restaurant" method="post" >
         <label for="restaurant_name">Restaurant Name:</label><br>
@@ -188,27 +195,36 @@
 
     <h1></h1>
     <!-- TODO: A form to submit to insert_restaurant_item -->
-        <!-- # "item_name": { "type": "string" },
-        # "restaurant_name": { "type": "string" },
-        # "price": { "type": "number" }, -->
+        <!-- METADATA (reference the keys for this object):  -->
+        <!-- item_details = {
+            "item_name": get_random_item_from(list_of_dishes),
+            "restaurant_name": get_random_restaurant_from_db(),
+            "price": randint(1, 30),
+            'user_email': get_random_user_email_from_db()
+        } -->
 
     <h1></h1>
     <!-- TODO: A form to submit to place_order -->
-        <!-- # "tip": { "type": "string" },
-        # "status": { "type": "string" },
-        # "special_instructions": { "type": "string" },
-        # "consumer_email": { "type": "string" },
-        # "restaurant_name": { "type": "string" },
-        # "item_name": { "type": "string" }, -->
+        <!-- METADATA (reference the keys for this object):  -->
+        <!-- example_order = {
+            'tip': randint(0, 20),
+            'status': 0,
+            'special_instructions': ["None", "please Include utensils"][randint(0, 1)],
+            'consumer_email': get_random_user_email_from_db(),
+            'restaurant_name': restaurant_name,
+            'item_name': get_random_item_from_restaurant(restaurant_name)
+        } -->
 
     <h1></h1>
     <!-- TODO: A form to submit to rate_restaurant -->
-        <!-- # "tip": { "type": "string" },
-        # "restaurant": { "type": "string" },
-        # "user_email": { "type": "string" },
-        # "rating_time": { "type": "string" },
-        # "value": { "type": "string" },
-        # "review": { "type": "string" }, -->
+        <!-- METADATA (reference the keys for this object):  -->
+        <!-- example_rating1 = {
+            'restaurant': rest_id1,
+            'cons_email1': get_random_user_email_from_db(),
+            'rating_time': 0,  # not sure how to get a random time stamp,
+            'value': randint(1, 5),
+            'review': reviews[randint(0, 1)]
+        } -->
 
 
 

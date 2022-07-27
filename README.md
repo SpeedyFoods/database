@@ -8,8 +8,19 @@
 ## How has our final schema differed from the schema we first Designed?
 
 
-# Getting Started:
+# Setting Up DataBase:
+simply run: 
+``` bash
+pip3 install -r requirements.txt
+```
 
+then create the tables and insert rows by running:
+``` bash
+pip3 create_all_tables_and_data.py
+```
+
+
+# Running our Application Server:
 1. Install Python Dependency Packages:
 mac:
 ``` bash
