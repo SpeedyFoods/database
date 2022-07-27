@@ -9,7 +9,10 @@
 
 
 # Setting Up DataBase:
-simply run: 
+First, you must have a sql database running. Create a database named `testdatabase` then edit the `db_client.py` with your
+database credentials. 
+
+run: 
 ``` bash
 pip3 install -r requirements.txt
 ```
@@ -40,39 +43,29 @@ $ export FLASK_ENV=development
 $ flask run
 ```
 
+# File Descriptions:
 
-# 
+### `/app.py`
+`/app.py` contains our Flask web framework that routes endpoints to the correct functions. It also serves web pages to the user.
 
+### `/handlers.py`
+`/handlers.py` contains the functions that handle the API endpoints.  All the logic for data insertions exist here.
+
+### `/insert_random_data_script.py`
+This file automatically 
+
+### `/queries/*`
+this folder contains queries table creation and insertion queries. Selection queries are handled in `handlers.py`
 
 # Endpoint Documentation
 
-## /user_sign_up
-payload example:
-``` json
-{
-    "first_name": "tomiii",
-    "last_name": "liu",
-    "email": "tomi69@gmail.com",
-    "phone": 77870777777,
-    "type": 0,
-    "zip": "V6R1Y9",
-    "city": "vancouver",
-    "building_number": 1111, 
-    "unit_number": 0,
-    "street_name": "Cambie st",
-    "card_number": "1234561234567890",
-    "expiration_date": 1234,
-    "bank_name": "CIBC",
-    "card_type": "debit",
-    "payment_system": "visa"
-}
+### /user_sign_up
 
-```
-## /place_order
+### /place_order
 
-## /register_restaurant
+### /insert_item
+### /register_restaurant
 
-## /rate_restaurant
+### /rate_restaurant
 
-## /reset_database
-- resets the database
+### /reset_database

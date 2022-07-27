@@ -1,5 +1,5 @@
 """
-Has the functions that handle the API endpoints
+Has the functions that handle the API endpoints. And all the logic for data insertions and queries
 """
 import datetime
 from multiprocessing import managers
