@@ -6,22 +6,25 @@ from multiprocessing import managers
 from random import randint
 from db_client import db, cursor
 from queries.insert_queries import *
+from queries.insert_queries_with_quote import *
 from utils.helper import get_random_speeder_id_from_db, get_restaurant_id_by_name, get_user_id_by_email, split_card_number, value_exist_in_column
 from tabulate import tabulate
 
 
-def insert_row(query_name, insert_query, insert_tuple):
+def insert_row(query_name, insert_query, insert_tuple, q):
     """
     Inserts the values into the table then returns the id/primary key of the last inserted row
     """
     try:
         cursor.execute(insert_query, insert_tuple)
-        print(f"{query_name} inserted successfully")
         db.commit()
+        query_printer(q, insert_tuple)
         return cursor.lastrowid
     except Exception as e:
-        print(e)
-        print(f"failed to insert to table {query_name}")
+        pass
+
+def query_printer(insert_query, insert_tuple):
+    print(insert_query % insert_tuple, ';')
 
 def register_user(user_detail):
     # we should do data validation. right now im able to insert multiple users with the same info. Myabe change some values to UNIQUE?
@@ -37,31 +40,30 @@ def register_user(user_detail):
     try:
         # INSERT USER
         insert_row("User", insert_user_query, (user_detail['first_name'],
-            user_detail['last_name'], user_detail['email'], user_detail['phone'], int(user_detail['type'])))
-
+            user_detail['last_name'], user_detail['email'], user_detail['phone'], int(user_detail['type'])), qinsert_user_query)
+        
         user_id = get_user_id_by_email(user_detail['email'])
 
         city = user_detail['city'].lower()
-        if(not value_exist_in_column('City', 'city_name', city)):
-            insert_row('City', insert_city_query, (city, user_detail['province'] ))
+        # if(not value_exist_in_column('City', 'city_name', city)):
+        insert_row('City', insert_city_query, (city, user_detail['province'] ), qinsert_city_query)
 
-        if (not value_exist_in_column("Zip", 'zip', user_detail['zip'])):
-            insert_row("Zip", insert_zip_query, (user_detail['zip'], user_detail['city']))
+        # if (not value_exist_in_column("Zip", 'zip', user_detail['zip'])):
+        insert_row("Zip", insert_zip_query, (user_detail['zip'], user_detail['city']), qinsert_zip_query)
 
         insert_row("Address", insert_user_address_query, (user_id, user_detail['zip'], user_detail['building_number'],
-            user_detail['unit_number'], user_detail['street_name']))
+            user_detail['unit_number'], user_detail['street_name']),qinsert_user_address_query)
 
         # remember to validate cardnumber has 16 digits
         [card_number_6,card_number_rest] = split_card_number(user_detail['card_number'])
 
-        if (not value_exist_in_column('Card_BIN', 'card_number_6', card_number_6)):
-            insert_row("Card_BIN", insert_card_bin_query, (card_number_6,
-                user_detail['bank_name'], user_detail['card_type'],
-                user_detail['payment_system']))
+        insert_row("Card_BIN", insert_card_bin_query, (card_number_6,
+            user_detail['bank_name'], user_detail['card_type'],
+            user_detail['payment_system']), qinsert_card_bin_query)
 
         insert_row("Card_All", insert_card_all_query, (card_number_6,
             card_number_rest, user_detail['expiration_date'],
-            user_detail['zip'], user_id))
+            user_detail['zip'], user_id), qinsert_card_all_query)
 
         res['success'] = True
         return res
@@ -69,8 +71,6 @@ def register_user(user_detail):
     # i think there is a better way to catch error messages
     except Exception as e:
         res['error'] = "Failed to insert user data" + str(e)
-        print("Failed to insert user data")
-        print(e)
         return res
 
 def register_restaurant(restaurant_detail):
@@ -86,24 +86,23 @@ def register_restaurant(restaurant_detail):
             # manager_id = randint(100,500)
             res['error'] = f"User with email {restaurant_detail['restaurant_manager_email']} does not Exist"
             res['success'] = False
-            print( f"User with email {restaurant_detail['restaurant_manager_email']} does not Exist")
+            # print( f"User with email {restaurant_detail['restaurant_manager_email']} does not Exist")
             return res
         if (value_exist_in_column('Restaurant', 'restaurant_id', manager_id)):
             res['error'] = f"This user is already managing a restaurant"
             res['success'] = False
             return res
 
-        if (not value_exist_in_column('RestaurantParent', 'restaurant_name', restaurant_detail['restaurant_name'])):
-            insert_row("Restaurant Parent", insert_restaurant_parent_query,
-                    (restaurant_detail['restaurant_name'], restaurant_detail['cuisine']))
+        insert_row("Restaurant Parent", insert_restaurant_parent_query,
+                (restaurant_detail['restaurant_name'], restaurant_detail['cuisine']), qinsert_restaurant_parent_query)
 
-        insert_row("Restaurant", insert_restaurant_query, (manager_id, restaurant_detail['restaurant_name']))
+        insert_row("Restaurant", insert_restaurant_query, (manager_id, restaurant_detail['restaurant_name']), qinsert_restaurant_query)
         return res
 
     except Exception as e:
         res['error'] = "Failed to insert user data" + str(e)
-        print("Failed to register user")
-        print(e)
+        # print("Failed to register user")
+        # print(e)
         return res
 
 
@@ -113,11 +112,10 @@ def insert_restaurant_item(register_item_detail):
     res['error'] = "no errors"
     try:
         restaurant_id = get_restaurant_id_by_name(register_item_detail['restaurant_name'])
-        insert_row("Item", insert_item_query, (register_item_detail['item_name'], restaurant_id, register_item_detail['price']))
+        insert_row("Item", insert_item_query, (register_item_detail['item_name'], restaurant_id, register_item_detail['price']), qinsert_item_query)
     except Exception as e:
         res['error'] = "Failed to insert user data" + str(e)
-        print("Failed to insert restaurant item")
-        print(e)
+        # print("Failed to insert restaurant item") print(e)
         return res
     return res
 
@@ -128,18 +126,22 @@ def place_order(order_detail):
     res['success'] = False
     res['error'] = "no errors"
     try:
+        # print(1)
         consumer_id = get_user_id_by_email(order_detail['consumer_email'])
+        # print(2)
         restaurant_id = get_restaurant_id_by_name(order_detail['restaurant_name'])
 
+        # print(3)
         order_id = insert_row("_Order", insert_order_query,
-                (order_detail['tip'],0 , datetime.datetime.now(), order_detail['special_instructions'], consumer_id, restaurant_id, get_random_speeder_id_from_db()))
+                (order_detail['tip'],0, order_detail['special_instructions'], consumer_id, restaurant_id, 1),qinsert_order_query)
 
+        # print(4)
         insert_row("Order to Item", insert_order_to_item_query,
-                    (order_id, restaurant_id, order_detail['item_name']))
+                    (order_id, restaurant_id, order_detail['item_name']), qinsert_order_to_item_query)
     except Exception as e:
         res['error'] = "Failed to insert user data" + str(e)
-        print("Failed to place order" + str(e))
-        print(e)
+        # print("Failed to place order" + str(e))
+        # print(e)
         return res
 
 def rate_restaurant(user_detail):
@@ -161,7 +163,7 @@ def rate_restaurant(user_detail):
     # find the user_id_consumer ratable by doing a select search statemet
 
     insert_row("user to user reviews", insert_user_to_user_reviews_query, (user_id_ratable,
-                consumer_id1, user_detail['value'], user_detail['review']))
+                consumer_id1, user_detail['value'], user_detail['review']), qinsert_user_to_user_reviews_query)
 
 # --------------------------------------------------
 # Select queries here?

@@ -1,4 +1,4 @@
-insert_user_query = """
+qinsert_user_query = """
 INSERT INTO User (
 	first_name, 
 	last_name, 
@@ -6,20 +6,20 @@ INSERT INTO User (
 	phone, 
 	type
 )
-VALUES (%s, %s, %s, %s, %s) 
+VALUES ('%s', '%s', '%s', %s, %s) 
 """
 
-insert_card_bin_query = """
+qinsert_card_bin_query = """
 INSERT INTO Card_BIN (
 	card_number_6,
 	bank_name,
 	card_type, 
 	payment_system
 )
-VALUES (%s, %s, %s, %s)
+VALUES (%s, '%s', '%s', '%s')
 """
 
-insert_card_all_query = """
+qinsert_card_all_query = """
 INSERT INTO Card_All (
 	card_number_6, 
 	card_number_rest,
@@ -27,11 +27,10 @@ INSERT INTO Card_All (
 	zip,
 	user_id
 )
-VALUES (%s, %s, %s, %s, %s)
+VALUES (%s, %s, %s, '%s', %s)
 """
 
-
-insert_user_address_query = """
+qinsert_user_address_query = """
 INSERT INTO User_Address (
 	user_id, 
 	zip,
@@ -39,36 +38,36 @@ INSERT INTO User_Address (
 	unit_number, 
 	street_name
 )
-VALUES (%s, %s, %s, %s, %s)
+VALUES (%s, '%s', %s, %s, '%s')
 """
 
-insert_zip_query = """
+qinsert_zip_query = """
 INSERT INTO Zip (
 	zip,
 	city_name
 )
-VALUES (%s, %s)
+VALUES ('%s', '%s')
 """
 
-insert_city_query = """
+qinsert_city_query = """
 INSERT INTO City (
 	city_name,
 	province_name
 )
-VALUES (%s, %s)
+VALUES ('%s', '%s')
 """
 
-insert_user_to_user_reviews_query = """
+qinsert_user_to_user_reviews_query = """
 INSERT INTO UserToUser_Reviews (
 	user_id_ratable, 
 	user_id_consumer, 
 	value,
 	review
 )
-VALUES (%s, %s, %s, %s)
+VALUES (%s, %s, %s, '%s')
 """
 
-insert_speeder_query = """
+qinsert_speeder_query = """
 INSERT INTO Speeder (
 	speeder_id,
 	transit, 
@@ -78,7 +77,7 @@ INSERT INTO Speeder (
 VALUES (%s, %s, %s, %s)
 """
 
-insert_order_query = """
+qinsert_order_query = """
 INSERT INTO _Order (
 	tip,
 	status, 
@@ -87,40 +86,40 @@ INSERT INTO _Order (
 	restaurant_id, 
 	speeder_id
 )
-VALUES (%s, %s, %s, %s, %s, %s)
+VALUES (%s, %s, '%s', %s, %s, %s)
 """
 
-insert_restaurant_query = """
+qinsert_restaurant_query = """
 INSERT INTO Restaurant (
 	restaurant_id,
 	restaurant_name
 )
-VALUES (%s, %s)
+VALUES (%s, '%s')
 """
 
-insert_restaurant_parent_query = """
+qinsert_restaurant_parent_query = """
 INSERT INTO RestaurantParent (
 	restaurant_name,
 	cuisine
 )
-VALUES (%s, %s)
+VALUES ('%s', '%s')
 """
 
-insert_item_query = """
+qinsert_item_query = """
 INSERT INTO Item (
 	item_name, 
 	restaurant_id ,
 	price
 )
-VALUES (%s, %s, %s)
+VALUES ('%s', %s, %s)
 """
 
 
-insert_order_to_item_query = """
+qinsert_order_to_item_query = """
 INSERT INTO OrderToItem (
 	order_id,
 	restaurant_id,
 	item_name
 )
-VALUES (%s, %s, %s)
+VALUES (%s, %s, '%s')
 """

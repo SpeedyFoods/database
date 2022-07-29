@@ -9,6 +9,7 @@ from db_client import cursor
 from handlers import get_restaurant_id_by_name, insert_restaurant_item, insert_row, place_order, register_restaurant, register_user, rate_restaurant
 from utils.helper import generate_fake_zip, get_random_item_from, get_random_item_from_restaurant, get_random_restaurant_from_db, get_random_user_email_from_db
 from queries.insert_queries import insert_speeder_query
+from queries.insert_queries_with_quote import *
 
 
 def populate_register_user():
@@ -113,6 +114,7 @@ def populate_rate_restaurant():
 
 def insert_random_data():
     populate_register_user()
+    insert_row("Speeder", insert_speeder_query, (1, 2, 123, 49), qinsert_speeder_query )
     populate_register_speeder()
     populate_register_restaurant()
     populate_insert_restaurant_item()
@@ -124,4 +126,4 @@ if __name__ == "__main__":
     """
     The order of which we want to populate the tables
     """
-    # insert_random_data()
+    insert_random_data()
