@@ -25,7 +25,7 @@ Our team built a full stack application with html, python’s Flask API framewor
 
 
 
-## How has our final schema differed from the schema we first Designed?
+# How has our final schema differed from the schema we first Designed?
 Throughout our planning and development process, we have mostly used the schema that we turned in except for minor changes. 
 Some changes that we’ve made:
 - Separated Zip from Address into its own table since it can be a repeated value
