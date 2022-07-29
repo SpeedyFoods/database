@@ -8,6 +8,11 @@
 ## How has our final schema differed from the schema we first Designed?
 
 
+# Create all tables and insert all Data from SQL Script
+
+copy the script inside `generate_all_tables_and_rows.sql` and run it.
+
+
 # Setting Up DataBase:
 First, you must have a sql database running. Create a database named `testdatabase` then edit the `db_client.py` with your
 database credentials. 
