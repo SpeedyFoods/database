@@ -1,7 +1,7 @@
 # Speedy Foods Database
 
 ## About Us:
-
+Please read `/milestone_4_.pdf` for screenshots and summary.
 
 # What We've Accomplisehd:
 In milestone 4, we have built a complete application that has food delivery functionalities.
