@@ -133,7 +133,7 @@ CREATE TABLE Card_All (
 # (11) referenced by OrderToItem
 create_item_table_query = '''
 CREATE TABLE Item (
-    item_name CHAR(20), 
+    item_name CHAR(50), 
     restaurant_id INTEGER,
     price FLOAT NOT NULL,
     PRIMARY KEY (item_name, restaurant_id),
