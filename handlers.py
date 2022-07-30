@@ -1,5 +1,5 @@
 """
-Has the functions that handle the API endpoints
+Has the functions that handle the API endpoints. And all the logic for data insertions and queries
 """
 import datetime
 from multiprocessing import managers
@@ -173,7 +173,6 @@ def view_users():
     cursor.execute("select * from User;")
     myresult = cursor.fetchall()
     html = tabulate(myresult, tablefmt='html')
-    print(html)
     return html
 
 
