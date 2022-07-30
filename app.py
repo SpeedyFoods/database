@@ -41,6 +41,12 @@ def form_item():
     return render_template(
             'form_item.html',
         )
+
+@app.route('/form_order')
+def form_order():
+    return render_template(
+            'form_order.html',
+        )
 # ------------------------------------ #
  
 # EXPECTED VALUES FROM THE FORM

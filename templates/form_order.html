@@ -3,7 +3,7 @@
 <h1>Place Order</h1>
 <form action="/place_order" method="post">
     <div>
-        <label for="consumer_email">Consumer Email</label><br> # type email or type text?
+        <label for="consumer_email">Consumer Email</label><br>
         <input type="email" id="consumer_email" name="consumer_email" placeholder="johnsmith@coldmail.com" required><br>
     </div>
     <div>
@@ -16,18 +16,19 @@
     </div>
     <div>
         <label for="special_instructions">Special Instructions</label><br>
-        <input type="text" id="special_instructions" name="special_instructions" placeholder="Ring bell" required><br>
+        <input type="text" id="special_instructions" name="special_instructions" placeholder="Ring bell"><br>
     </div>
     <div>
-        <label for="tip">Special Instructions</label><br>
-        <input type="text" id="tip" name="tip" placeholder="3.99" required><br> # Not sure about this one, app.py expects string for tip?
+        <label for="tip">Tip</label><br>
+        <input type="number" id="tip" name="tip" placeholder="3.99" required><br> 
+        <!--?Not sure about this one, app.py expects string for tip?--> 
     </div>
-    <div>
-        <label for="status">Status</label><br> # Not sure why we need status here, or why it's a string
-        <input type="text" id="status" name="status" placeholder="Not ready" required><br>
-    </div>
+    <!--?Not sure why we need status here, or why it's a string-->
+    <!--^^We don't, according to place_order function in handlers.py-->
     <input type="submit" value="Place Order">
 </form>
+{% endblock %}
+<!--
 # EXPECTED VALUES FROM THE FORM (From app.py)
 # "tip": { "type": "string" },
 # "status": { "type": "string" },
@@ -35,6 +36,7 @@
 # "consumer_email": { "type": "string" },
 # "restaurant_name": { "type": "string" },
 # "item_name": { "type": "string" },
+-->
 <!--<!DOCTYPE html>-->
 <!--<html lang="en">-->
 <!--<head>-->
