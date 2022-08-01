@@ -170,29 +170,32 @@ def rate_restaurant(user_detail):
 # --------------------------------------------------
 # Select queries here?
 
+def table_from_cursor(cursor):
+    """
+    returns html table as a string
+    """
+    myresult = cursor.fetchall()
+    field_names = [i[0] for i in cursor.description]
+    html = tabulate(myresult, tablefmt='html', headers=field_names)
+    return html
+
 def view_users():
     """
     goal is to return a list of user detail
     """
     cursor.execute("select * from User;")
-    myresult = cursor.fetchall()
-    html = tabulate(myresult, tablefmt='html')
-    return html
+    return table_from_cursor(cursor)
 
 
 def view_restaurants():
     cursor.execute("select * from Restaurant;")
-    myresult = cursor.fetchall()
-    html = tabulate(myresult, tablefmt='html')
-    return html
+    return table_from_cursor(cursor)
 
 def view_restaurant_items(restaurant_name):
     # check if restaurant exists, if not, return "Restaurant not in database"
     # cursor.execute(f"select * from Restaurant where restaurant_name = '{restaurant_name}';")
     cursor.execute(f"select * from Restaurant, Item where restaurant_name = '{restaurant_name}' and Restaurant.restaurant_id = Item.restaurant_id;")
-    myresult = cursor.fetchall()
-    html = tabulate(myresult, tablefmt='html')
-    return html
+    return table_from_cursor(cursor)
 
     # else, return html
     # return "items table"
@@ -200,22 +203,16 @@ def view_restaurant_items(restaurant_name):
 def view_orders():
     # select all orders and return it
     cursor.execute("select * from _Order;")
-    myresult = cursor.fetchall()
-    html = tabulate(myresult, tablefmt='html')
-    return html
+    return table_from_cursor(cursor)
     # return "orders"
 
 def view_users_ordered_from_every_restaurant():
     cursor.execute(view_users_ordered_from_every_restaurant_query)
-    myresult = cursor.fetchall()
-    html = tabulate(myresult, tablefmt='html')
-    return html
+    return table_from_cursor(cursor)
 
 def aggregate_query():
     cursor.execute(select_average_price_of_all_items)
-    myresult = cursor.fetchall()
-    html = tabulate(myresult, tablefmt='html')
-    return html
+    return table_from_cursor(cursor)
     
 def update_user_email(data):
     print(data)
