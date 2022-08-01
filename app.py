@@ -2,14 +2,10 @@
 application to run the python flask server
 """
 
-from turtle import title
 from flask import Flask, render_template
 from flask import request
-from flask_expects_json import expects_json
 from utils.create_tables import create_tables
-
 from handlers import aggregate_query, delete_user_by_id, insert_restaurant_item, register_user, register_restaurant, place_order, rate_restaurant, update_user_email, view_orders, view_restaurant_items, view_restaurants, view_users, view_users_ordered_from_every_restaurant
-from utils.insert_single_rows import insert_sample_rows
 
 from utils.fake_values import bank_names
 
