@@ -2,6 +2,9 @@ body {
   background-color: rgb(222, 249, 253);
 }
 
+hr {
+  border: 2px dashed rgb(0, 191, 255);
+}
 .large-section {
   border: 0.25rem solid rgb(0, 191, 255);
   padding: 2rem;
@@ -21,4 +24,12 @@ form input, form select {
 
 form input:not(input[type="radio"]):not(input[type="submit"]) {
   min-width: 12rem;
+}
+
+.title {
+  margin-bottom: 2px;
+}
+
+.subtitle {
+  color: gray;
 }

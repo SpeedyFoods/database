@@ -1,13 +1,14 @@
 {% extends "common.html" %}
 {% block inside %}
-    <h1>Welcome to SpeedyFoods</h1>
-
+    <h1 class="title">Welcome to SpeedyFoods 🔥💨</h1>
+    <span class="subtitle"><em>"Food Delivered to Your Mouth"</em></span>
+    <br>
+    <br>
     <h3>Views</h3>
     <!--  A button that shows a list of Users -->
     <form action="/view_users">
         <input type="submit" value="View Users" />
     </form>
-
     <!-- A button that shows a list of Restaurants along with their raitng -->
     <form action="/view_restaurants">
         <input type="submit" value="View Restaurants" />
@@ -24,14 +25,15 @@
     </form>
 
     <form action="/view_users_ordered_from_every_restaurant">
-        <input type="submit" value="View Users who have Ordered from Every Restaurant" />
+        <input type="submit" value="View Users who have Ordered from every Restaurant" />
     </form>
 
     <form action="/view_aggregate">
-        <input type="submit" value="View average price of all items" />
+        <input type="submit" value="View Average Price of all Items" />
     </form>
-
-    <h3>Forms:</h3>
+    <br>
+    <hr>
+    <h3>Forms</h3>
     <form action="/form_order">
         <input type="submit" value="Place Order" />
     </form>
@@ -76,21 +78,25 @@
         <input type="submit" value="Insert Restaurant Item" />
     </form>
 
-<form action="/delete_user_by_id" method="post">
-  <div>
-    <label for="user_id">User Id</label><br>
+<form action="/delete_user_by_id" method="post" onsubmit="return confirm('Do you really want to delete the user with that id?')">
+  <br>
+  <fieldset>
+    <legend>Delete User</legend>
+    <label for="user_id"><em>Enter User ID →</em></label>
     <input type="text" name="user_id" id="user_id" placeholder="2" required>
-  </div>
-  <input type="submit" value="delete user">
+    <input type="submit" value="Delete User">
+  </fieldset>
+  <br>
 </form>
 <form action="/update_user_email" method="post">
-  <div>
-    <label for="user_id">User Id</label><br>
-    <input type="text" name="user_id" id="user_id" placeholder="1" required>
-    <label for="user_email">User email</label><br>
-    <input type="text" name="user_email" id="user_email" placeholder="newEmail@mail.com" required>
-  </div>
-  <input type="submit" value="update user email">
+  <fieldset>
+    <legend>Update User Email</legend>
+    <label for="user_id"><em>Enter User ID →</em></label>
+    <input type="text" name="user_id" id="user_id" placeholder="1" required><br>
+    <label for="user_email"><em>Enter New User Email →</em></label>
+    <input type="text" name="user_email" id="user_email" placeholder="new_email@mail.com" required>
+    <input type="submit" value="Update User Email">
+  </fieldset>
 </form>
 
     <!-- TODO: A form to submit to place_order -->
