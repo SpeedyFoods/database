@@ -128,35 +128,59 @@ def route_rate_restaurant():
 @app.route('/view_users', methods=['GET'])
 def route_view_users():
     data = view_users()
-    return data
+    return render_template(
+        'table_view.html',
+        data=data,
+        title="View Users"
+    )
 
 # discussion
 @app.route('/view_restaurants', methods=['GET'])
 def route_view_restaurants():
     data = view_restaurants()
-    return data
+    return render_template(
+        'table_view.html',
+        data=data,
+        title="View Restaurants"
+    )
 
 @app.route('/view_restaurant_items', methods=['POST'])
 def rote_view_restaurant_items():
     restaurant_name = request.form.to_dict(flat=True)['restaurant_name']
     print(restaurant_name)
     res = view_restaurant_items(restaurant_name)
-    return res
+    return render_template(
+        'table_view.html',
+        data=res,
+        title=f"View {restaurant_name}'s Items"
+    )
 
 @app.route('/view_orders', methods=['GET'])
 def route_view_orders():
     data = view_orders()
-    return data
+    return render_template(
+        'table_view.html',
+        data=data,
+        title="View Orders"
+    )
 
 @app.route('/view_users_ordered_from_every_restaurant', methods=['GET'])
 def route_division_query():
     data = view_users_ordered_from_every_restaurant()
-    return data
+    return render_template(
+        'table_view.html',
+        data=data,
+        title="View Users who Ordered from every Restaurant"
+    )
 
 @app.route('/view_aggregate', methods=['GET'])
 def route_aggregate():
     data = aggregate_query()
-    return data
+    return render_template(
+        'table_view.html',
+        data=data,
+        title="View Average Price of all Items"
+    )
 
 @app.route('/update_user_email', methods=['POST'])
 def route_update_user_email():

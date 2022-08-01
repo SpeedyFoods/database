@@ -38,3 +38,19 @@ form input:not(input[type="radio"]):not(input[type="submit"]) {
   display: flex;
   justify-content: space-between;
 }
+
+table {
+  border-collapse: collapse;
+}
+tr {
+  border-bottom: 1px solid gray;
+}
+th, td {
+  min-width: 100px;
+  text-align: left;
+  border-left: 1px solid gray;
+  padding: 5px;
+}
+th:first-of-type, td:first-of-type {
+  border: none;
+}
