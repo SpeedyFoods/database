@@ -1961,3 +1961,139 @@ INSERT INTO UserToUser_Reviews (
 )
 VALUES (19, 15, 1, 'Very tasty food, speedy delivery')
  ;
+
+
+INSERT INTO _Order (
+	tip,
+    order_time,
+	status, 
+	special_instructions, 
+	consumer_id, 
+	restaurant_id, 
+	speeder_id
+)
+VALUES (1, '2022-07-31 18:11:50', 0, "Im ordering from every restaurant haha", 2, 2, 1);
+
+INSERT INTO _Order (
+	tip,
+    order_time,
+	status, 
+	special_instructions, 
+	consumer_id, 
+	restaurant_id, 
+	speeder_id
+)
+VALUES (1, '2022-07-31 18:11:50', 0, "Im ordering from every restaurant haha", 2, 3, 1);
+
+INSERT INTO _Order (
+	tip,
+    order_time,
+	status, 
+	special_instructions, 
+	consumer_id, 
+	restaurant_id, 
+	speeder_id
+)
+VALUES (1, '2022-07-31 18:11:50', 0, "Im ordering from every restaurant haha", 2, 7, 1);
+INSERT INTO _Order (
+	tip,
+    order_time,
+	status, 
+	special_instructions, 
+	consumer_id, 
+	restaurant_id, 
+	speeder_id
+)
+VALUES (1, '2022-07-31 18:11:50', 0, "Im ordering from every restaurant haha", 2, 9, 1);
+
+INSERT INTO _Order (
+	tip,
+    order_time,
+	status, 
+	special_instructions, 
+	consumer_id, 
+	restaurant_id, 
+	speeder_id
+)
+VALUES (1, '2022-07-31 18:11:50', 0, "Im ordering from every restaurant haha", 2, 10, 1);
+
+INSERT INTO _Order (
+	tip,
+    order_time,
+	status, 
+	special_instructions, 
+	consumer_id, 
+	restaurant_id, 
+	speeder_id
+)
+VALUES (1, '2022-07-31 18:11:50', 0, "Im ordering from every restaurant haha", 2, 11, 1);
+INSERT INTO _Order (
+	tip,
+    order_time,
+	status, 
+	special_instructions, 
+	consumer_id, 
+	restaurant_id, 
+	speeder_id
+)
+VALUES (1, '2022-07-31 18:11:50', 0, "Im ordering from every restaurant haha", 2, 13, 1);
+INSERT INTO _Order (
+	tip,
+    order_time,
+	status, 
+	special_instructions, 
+	consumer_id, 
+	restaurant_id, 
+	speeder_id
+)
+VALUES (1, '2022-07-31 18:11:50', 0, "Im ordering from every restaurant haha", 2, 14, 1);
+INSERT INTO _Order (
+	tip,
+    order_time,
+	status, 
+	special_instructions, 
+	consumer_id, 
+	restaurant_id, 
+	speeder_id
+)
+VALUES (1, '2022-07-31 18:11:50', 0, "Im ordering from every restaurant haha", 2, 15, 1);
+INSERT INTO _Order (
+	tip,
+    order_time,
+	status, 
+	special_instructions, 
+	consumer_id, 
+	restaurant_id, 
+	speeder_id
+)
+VALUES (1, '2022-07-31 18:11:50', 0, "Im ordering from every restaurant haha", 2, 17, 1);
+INSERT INTO _Order (
+	tip,
+    order_time,
+	status, 
+	special_instructions, 
+	consumer_id, 
+	restaurant_id, 
+	speeder_id
+)
+VALUES (1, '2022-07-31 18:11:50', 0, "Im ordering from every restaurant haha", 2, 18, 1);
+INSERT INTO _Order (
+	tip,
+    order_time,
+	status, 
+	special_instructions, 
+	consumer_id, 
+	restaurant_id, 
+	speeder_id
+)
+VALUES (1, '2022-07-31 18:11:50', 0, "Im ordering from every restaurant haha", 2, 19, 1);
+INSERT INTO _Order (
+	tip,
+    order_time,
+	status, 
+	special_instructions, 
+	consumer_id, 
+	restaurant_id, 
+	speeder_id
+)
+VALUES (1, '2022-07-31 18:11:50', 0, "Im ordering from every restaurant haha", 2, 20, 1);

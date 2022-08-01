@@ -1,6 +1,8 @@
 {% extends "common.html" %}
 {% block inside %}
     <h1>Welcome to SpeedyFoods</h1>
+
+    <h3>Views</h3>
     <!--  A button that shows a list of Users -->
     <form action="/view_users">
         <input type="submit" value="View Users" />
@@ -21,13 +23,18 @@
         <input type="submit" value="View Orders" />
     </form>
 
+    <form action="/view_users_ordered_from_every_restaurant">
+        <input type="submit" value="View Users who have Ordered from Every Restaurant" />
+    </form>
+
+    <h3>Forms:</h3>
     <form action="/form_order">
         <input type="submit" value="Place Order" />
     </form>
 
     <!-- Rithik -->
     <!-- TODO: A button that USES DIVISION -->
-
+    
     <!-- A form to register a user -->
     <!-- METADATA -->
         <!-- #   # user details

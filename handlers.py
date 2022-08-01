@@ -3,9 +3,9 @@ Has the functions that handle the API endpoints. And all the logic for data inse
 """
 import datetime
 from multiprocessing import managers
-from random import randint
 from db_client import db, cursor
 from queries.insert_queries import *
+from queries.division_query import view_users_ordered_from_every_restaurant_query
 from utils.helper import get_random_speeder_id_from_db, get_restaurant_id_by_name, get_user_id_by_email, split_card_number, value_exist_in_column
 from tabulate import tabulate
 
@@ -130,6 +130,7 @@ def place_order(order_detail):
     try:
         consumer_id = get_user_id_by_email(order_detail['consumer_email'])
         restaurant_id = get_restaurant_id_by_name(order_detail['restaurant_name'])
+        print(consumer_id, restaurant_id)
 
         order_id = insert_row("_Order", insert_order_query,
                 (order_detail['tip'],0 , datetime.datetime.now(), order_detail['special_instructions'], consumer_id, restaurant_id, get_random_speeder_id_from_db()))
@@ -201,5 +202,12 @@ def view_orders():
     return html
     # return "orders"
 
+def view_users_ordered_from_every_restaurant():
+    cursor.execute(view_users_ordered_from_every_restaurant_query)
+    myresult = cursor.fetchall()
+    html = tabulate(myresult, tablefmt='html')
+    return html
+
 if __name__ == "__main__":
-    view_restaurants()
+    # view_restaurants()
+    pass

@@ -7,7 +7,7 @@ from flask import request
 from flask_expects_json import expects_json
 from utils.create_tables import create_tables
 
-from handlers import insert_restaurant_item, register_user, register_restaurant, place_order, rate_restaurant, view_orders, view_restaurant_items, view_restaurants, view_users
+from handlers import insert_restaurant_item, register_user, register_restaurant, place_order, rate_restaurant, view_orders, view_restaurant_items, view_restaurants, view_users, view_users_ordered_from_every_restaurant
 from utils.insert_single_rows import insert_sample_rows
 
 from utils.fake_values import bank_names
@@ -145,6 +145,12 @@ def rote_view_restaurant_items():
 def route_view_orders():
     data = view_orders()
     return data
+
+@app.route('/view_users_ordered_from_every_restaurant', methods=['GET'])
+def route_division_query():
+    data = view_users_ordered_from_every_restaurant()
+    return data
+
 
 # discussion
 @app.route('/reset_database', methods=['GET'])
