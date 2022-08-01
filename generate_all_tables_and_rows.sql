@@ -1,7 +1,6 @@
-DROP DATABASE testdatabase;
+-- DROP DATABASE testdatabase;
 CREATE DATABASE testdatabase;
 use testdatabase;
-show tables;
 
 CREATE TABLE Card_BIN (
     card_number_6 CHAR(6),
@@ -51,7 +50,7 @@ CREATE TABLE User_Address (
     street_name CHAR(50),
     PRIMARY KEY (address_id),
     FOREIGN KEY (zip) REFERENCES Zip(zip),
-    FOREIGN KEY (user_id) REFERENCES User(user_id)
+    FOREIGN KEY (user_id) REFERENCES User(user_id) ON DELETE CASCADE
 );
 
 CREATE TABLE UserToUser_Reviews (
@@ -61,7 +60,7 @@ CREATE TABLE UserToUser_Reviews (
     value  INTEGER NOT NULL,
     review TEXT,
     PRIMARY KEY (user_id_ratable, user_id_consumer, rating_time),
-    FOREIGN KEY (User_id_consumer) REFERENCES User(user_id),
+    FOREIGN KEY (User_id_consumer) REFERENCES User(user_id) ON DELETE CASCADE,
     CHECK (value >= 1 AND value <= 5)
 );
 
@@ -71,7 +70,7 @@ CREATE TABLE Speeder (
     current_long FLOAT NOT NULL, 
     current_lat FLOAT NOT NULL,
     PRIMARY KEY (speeder_id),
-    FOREIGN KEY (speeder_id) REFERENCES User(user_id),
+    FOREIGN KEY (speeder_id) REFERENCES User(user_id) ON DELETE CASCADE,
     CHECK (transit >= 0 AND transit <= 2),
     CHECK (current_long >= -180 AND current_long <= 180), 
     CHECK (current_lat >= -90 AND current_lat <= 90)
@@ -82,7 +81,7 @@ CREATE TABLE Restaurant (
     restaurant_name CHAR(50) UNIQUE,
     PRIMARY KEY (restaurant_id),
     FOREIGN KEY (restaurant_name) References RestaurantParent(restaurant_name),
-    FOREIGN KEY (restaurant_id) REFERENCES User(user_id)
+    FOREIGN KEY (restaurant_id) REFERENCES User(user_id) ON DELETE CASCADE
 );
 
 CREATE TABLE Card_All (
@@ -93,7 +92,7 @@ CREATE TABLE Card_All (
     user_id INTEGER NOT NULL, 
     PRIMARY KEY (card_number_6, card_number_rest),
     FOREIGN KEY (zip) REFERENCES Zip(zip),
-    FOREIGN KEY (user_id) REFERENCES User(user_id),
+    FOREIGN KEY (user_id) REFERENCES User(user_id) ON DELETE CASCADE,
     FOREIGN KEY (card_number_6) REFERENCES Card_BIN(card_number_6)
 );
 
@@ -102,7 +101,7 @@ CREATE TABLE Item (
     restaurant_id INTEGER,
     price FLOAT NOT NULL,
     PRIMARY KEY (item_name, restaurant_id),
-    FOREIGN KEY (restaurant_id) REFERENCES Restaurant(restaurant_id)
+    FOREIGN KEY (restaurant_id) REFERENCES Restaurant(restaurant_id) ON DELETE CASCADE
 );
 
 CREATE TABLE _Order (
@@ -115,9 +114,9 @@ CREATE TABLE _Order (
     restaurant_id INTEGER, 
     speeder_id INTEGER,
     PRIMARY KEY (order_id),
-    FOREIGN KEY (consumer_id) REFERENCES User(user_id),
-    FOREIGN KEY (restaurant_id) REFERENCES Restaurant(restaurant_id),
-    FOREIGN KEY (speeder_id) REFERENCES Speeder(speeder_id),
+    FOREIGN KEY (consumer_id) REFERENCES User(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (restaurant_id) REFERENCES Restaurant(restaurant_id) ON DELETE CASCADE,
+    FOREIGN KEY (speeder_id) REFERENCES Speeder(speeder_id) ON DELETE CASCADE,
     CHECK (status <= 3 AND status >= 0)
 );
 
@@ -126,8 +125,8 @@ CREATE TABLE OrderToItem (
     restaurant_id INTEGER,
     item_name CHAR(20),
     PRIMARY KEY (order_id, restaurant_id, item_name),
-    FOREIGN KEY (order_id) REFERENCES _Order(order_id),
-    FOREIGN KEY (item_name, restaurant_id) REFERENCES Item(item_name, restaurant_id)
+    FOREIGN KEY (order_id) REFERENCES _Order(order_id) ON DELETE CASCADE,
+    FOREIGN KEY (item_name, restaurant_id) REFERENCES Item(item_name, restaurant_id) ON DELETE CASCADE
 );
 
 

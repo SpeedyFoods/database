@@ -7,7 +7,7 @@ from flask import request
 from flask_expects_json import expects_json
 from utils.create_tables import create_tables
 
-from handlers import insert_restaurant_item, register_user, register_restaurant, place_order, rate_restaurant, view_orders, view_restaurant_items, view_restaurants, view_users, view_users_ordered_from_every_restaurant
+from handlers import aggregate_query, delete_user_by_id, insert_restaurant_item, register_user, register_restaurant, place_order, rate_restaurant, update_user_email, view_orders, view_restaurant_items, view_restaurants, view_users, view_users_ordered_from_every_restaurant
 from utils.insert_single_rows import insert_sample_rows
 
 from utils.fake_values import bank_names
@@ -151,7 +151,22 @@ def route_division_query():
     data = view_users_ordered_from_every_restaurant()
     return data
 
+@app.route('/view_aggregate', methods=['GET'])
+def route_aggregate():
+    data = aggregate_query()
+    return data
 
+@app.route('/update_user_email', methods=['POST'])
+def route_update_user_email():
+    data = request.form.to_dict(flat=True)
+    update_user_email(data)
+    return data
+
+@app.route('/delete_user_by_id', methods=['POST'])
+def route_delete_user_by_id():
+    data = request.form.to_dict(flat=True)
+    delete_user_by_id(data)
+    return data
 # discussion
 @app.route('/reset_database', methods=['GET'])
 def reset_database():

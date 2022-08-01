@@ -6,6 +6,9 @@ from multiprocessing import managers
 from db_client import db, cursor
 from queries.insert_queries import *
 from queries.division_query import view_users_ordered_from_every_restaurant_query
+from queries.aggregate import *
+from queries.update import *
+from queries.delete import *
 from utils.helper import get_random_speeder_id_from_db, get_restaurant_id_by_name, get_user_id_by_email, split_card_number, value_exist_in_column
 from tabulate import tabulate
 
@@ -207,6 +210,25 @@ def view_users_ordered_from_every_restaurant():
     myresult = cursor.fetchall()
     html = tabulate(myresult, tablefmt='html')
     return html
+
+def aggregate_query():
+    cursor.execute(select_average_price_of_all_items)
+    myresult = cursor.fetchall()
+    html = tabulate(myresult, tablefmt='html')
+    return html
+    
+def update_user_email(data):
+    print(data)
+    cursor.execute(update_user_email_query % (data['user_email'], int(data['user_id'])))
+    db.commit()
+    return True
+
+
+def delete_user_by_id(data):
+    print(data)
+    cursor.execute(delete_user_by_id_query % data['user_id'])
+    db.commit()
+    return True
 
 if __name__ == "__main__":
     # view_restaurants()
