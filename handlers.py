@@ -194,7 +194,7 @@ def view_restaurants():
 def view_restaurant_items(restaurant_name):
     # check if restaurant exists, if not, return "Restaurant not in database"
     # cursor.execute(f"select * from Restaurant where restaurant_name = '{restaurant_name}';")
-    cursor.execute(f"select * from Restaurant, Item where restaurant_name = '{restaurant_name}' and Restaurant.restaurant_id = Item.restaurant_id;")
+    cursor.execute(f"select item_name, price from Restaurant, Item where restaurant_name = '{restaurant_name}' and Restaurant.restaurant_id = Item.restaurant_id;")
     return table_from_cursor(cursor)
 
     # else, return html
