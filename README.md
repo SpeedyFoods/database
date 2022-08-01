@@ -1,7 +1,7 @@
 # Submission Checklist:
-[] make repository public
-[] paste git hash here
-[] submit link to canvas and verify that it is accessible publicly 
+- [ ] make repository public
+- [ ] paste git hash here
+- [ ] submit link to canvas and verify that it is accessible publicly 
 
 # Speedy Foods Database
 
@@ -43,6 +43,10 @@ Some changes that we’ve made:
 - Restaurant Items/Menu can be retrieved by simply writing a join query to find which restaurant the item belongs to. 
 
 Overall we kept the original schema form. Our improvements led to creating even tables, which made the coding implementation harder because we have to write more - checks and insert data to more tables.
+
+
+# Screenshots:
+
 
 
 # Create all tables and insert all Data from SQL Script
