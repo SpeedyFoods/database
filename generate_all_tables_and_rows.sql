@@ -1700,12 +1700,14 @@ INSERT INTO _Order (
 VALUES (13, 0, 'None', 8, 10, 1)
  ;
 
+
+
 INSERT INTO OrderToItem (
 	order_id,
 	restaurant_id,
 	item_name
 )
-VALUES (1, 10, 'Oven-Baked Red Whine')
+VALUES (1, 10, 'Oven-Baked Red Whine Ostrich')
  ;
 
 INSERT INTO _Order (
@@ -1724,7 +1726,7 @@ INSERT INTO OrderToItem (
 	restaurant_id,
 	item_name
 )
-VALUES (2, 15, 'Steamed Apple & Lave')
+VALUES (2, 15, 'Steamed Apple & Lavender Pheasant')
  ;
 
 INSERT INTO _Order (
@@ -1743,7 +1745,7 @@ INSERT INTO OrderToItem (
 	restaurant_id,
 	item_name
 )
-VALUES (3, 19, 'Roasted Honey-Coated')
+VALUES (3, 19, 'Roasted Honey-Coated Mutton')
  ;
 
 INSERT INTO _Order (
@@ -1757,13 +1759,13 @@ INSERT INTO _Order (
 VALUES (13, 0, 'please Include utensils', 15, 15, 1)
  ;
 
-INSERT INTO OrderToItem (
-	order_id,
-	restaurant_id,
-	item_name
-)
-VALUES (4, 15, 'Pressure-Cooked Ging')
- ;
+-- INSERT INTO OrderToItem (
+-- 	order_id,
+-- 	restaurant_id,
+-- 	item_name
+-- )
+-- VALUES (4, 15, 'Pressure-Cooked Vanilla Pigeon')
+--  ;
 
 INSERT INTO _Order (
 	tip,
@@ -1781,7 +1783,7 @@ INSERT INTO OrderToItem (
 	restaurant_id,
 	item_name
 )
-VALUES (5, 13, 'Breaded Fennel & Lem')
+VALUES (5, 13, 'Breaded Fennel & Lemon Turkey')
  ;
 
 INSERT INTO _Order (
@@ -1800,7 +1802,7 @@ INSERT INTO OrderToItem (
 	restaurant_id,
 	item_name
 )
-VALUES (6, 15, 'Broasted White Wine')
+VALUES (6, 15, 'Broasted White Wine Lamb')
  ;
 
 INSERT INTO _Order (
@@ -1819,7 +1821,7 @@ INSERT INTO OrderToItem (
 	restaurant_id,
 	item_name
 )
-VALUES (7, 19, 'Roasted Honey-Coated')
+VALUES (7, 19, 'Roasted Honey-Coated Mutton')
  ;
 
 INSERT INTO _Order (
@@ -1838,7 +1840,7 @@ INSERT INTO OrderToItem (
 	restaurant_id,
 	item_name
 )
-VALUES (8, 3, 'Dried Olives & Musta')
+VALUES (8, 3, 'Dried Olives & Mustard Rabbit')
  ;
 
 INSERT INTO _Order (
@@ -1857,7 +1859,7 @@ INSERT INTO OrderToItem (
 	restaurant_id,
 	item_name
 )
-VALUES (9, 15, 'Broasted White Wine')
+VALUES (9, 15, 'Broasted White Wine Lamb')
  ;
 
 INSERT INTO _Order (
@@ -1876,7 +1878,7 @@ INSERT INTO OrderToItem (
 	restaurant_id,
 	item_name
 )
-VALUES (10, 2, 'Basted Blackberry &')
+VALUES (10, 2, 'Basted Blackberry & Ginger Mammoth')
  ;
 
 INSERT INTO UserToUser_Reviews (
