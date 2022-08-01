@@ -2,6 +2,7 @@
 application to run the python flask server
 """
 
+from turtle import title
 from flask import Flask, render_template
 from flask import request
 from flask_expects_json import expects_json
@@ -19,7 +20,8 @@ from db_client import db, cursor
 @app.route('/')
 def hello_world():
     return render_template(
-            'home.html'
+            'home.html',
+            title="SpeedyFoods Home"
         )
 
 # ---------- Showing forms----------- #
@@ -27,25 +29,29 @@ def hello_world():
 def form_user():
     return render_template(
             'form_user.html',
-            bank_names=bank_names
+            bank_names=bank_names,
+            title="Register User"
         )
 
 @app.route('/form_restaurant')
 def form_restaurant():
     return render_template(
             'form_restaurant.html',
+            title="Register Restaurant"
         )
 
 @app.route('/form_item')
 def form_item():
     return render_template(
             'form_item.html',
+            title="Insert Item"
         )
 
 @app.route('/form_order')
 def form_order():
     return render_template(
             'form_order.html',
+            title="Place Order"
         )
 # ------------------------------------ #
  
