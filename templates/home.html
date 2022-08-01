@@ -27,6 +27,10 @@
         <input type="submit" value="View Users who have Ordered from Every Restaurant" />
     </form>
 
+    <form action="/view_aggregate">
+        <input type="submit" value="View average price of all items" />
+    </form>
+
     <h3>Forms:</h3>
     <form action="/form_order">
         <input type="submit" value="Place Order" />
@@ -71,6 +75,23 @@
     <form action="/form_item">
         <input type="submit" value="Insert Restaurant Item" />
     </form>
+
+<form action="/delete_user_by_id" method="post">
+  <div>
+    <label for="user_id">User Id</label><br>
+    <input type="text" name="user_id" id="user_id" placeholder="2" required>
+  </div>
+  <input type="submit" value="delete user">
+</form>
+<form action="/update_user_email" method="post">
+  <div>
+    <label for="user_id">User Id</label><br>
+    <input type="text" name="user_id" id="user_id" placeholder="1" required>
+    <label for="user_email">User email</label><br>
+    <input type="text" name="user_email" id="user_email" placeholder="newEmail@mail.com" required>
+  </div>
+  <input type="submit" value="update user email">
+</form>
 
     <!-- TODO: A form to submit to place_order -->
         <!-- METADATA (reference the keys for this object):  -->
