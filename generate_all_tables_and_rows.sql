@@ -1,14 +1,13 @@
--- DROP DATABASE testdatabase;
+DROP DATABASE testdatabase;
 CREATE DATABASE testdatabase;
 use testdatabase;
 
 CREATE TABLE Card_BIN (
     card_number_6 CHAR(6),
     bank_name CHAR(50) NOT NULL,
-    card_type INT NOT NULL,
+    card_type CHAR(20) NOT NULL,
     payment_system CHAR(30) NOT NULL,
-    PRIMARY KEY (card_number_6),
-    CHECK (card_type >= 0 AND card_type <= 1)
+    PRIMARY KEY (card_number_6)
 );
 
 CREATE TABLE RestaurantParent (
@@ -97,7 +96,7 @@ CREATE TABLE Card_All (
 );
 
 CREATE TABLE Item (
-    item_name CHAR(20), 
+    item_name CHAR(50), 
     restaurant_id INTEGER,
     price FLOAT NOT NULL,
     PRIMARY KEY (item_name, restaurant_id),
@@ -108,7 +107,7 @@ CREATE TABLE _Order (
     order_id INTEGER AUTO_INCREMENT,
     tip FLOAT NOT NULL,
     status INTEGER NOT NULL,
-    order_time TIMESTAMP NOT NULL, 
+    order_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, 
     special_instructions CHAR(250), 
     consumer_id INTEGER, 
     restaurant_id INTEGER, 
@@ -123,7 +122,7 @@ CREATE TABLE _Order (
 CREATE TABLE OrderToItem (
     order_id INTEGER,
     restaurant_id INTEGER,
-    item_name CHAR(20),
+    item_name CHAR(50),
     PRIMARY KEY (order_id, restaurant_id, item_name),
     FOREIGN KEY (order_id) REFERENCES _Order(order_id) ON DELETE CASCADE,
     FOREIGN KEY (item_name, restaurant_id) REFERENCES Item(item_name, restaurant_id) ON DELETE CASCADE
@@ -181,7 +180,7 @@ INSERT INTO Card_All (
 	zip,
 	user_id
 )
-VALUES (429458, 3673231878, 1432, 'A9K9H5', 1)
+VALUES (429458, 3673231878, '2000-03-14', 'A9K9H5', 1)
  ;
 
 INSERT INTO User (
@@ -215,7 +214,7 @@ INSERT INTO User_Address (
 	unit_number, 
 	street_name
 )
-VALUES (2, 'W4S3M3', 80433, 825, 'Coopers Circus')
+VALUES (2, 'W4S3M3', '80433', 825, 'Coopers Circus')
  ;
 
 INSERT INTO Card_BIN (
@@ -234,7 +233,7 @@ INSERT INTO Card_All (
 	zip,
 	user_id
 )
-VALUES (296329, 3051576050, 4051, 'W4S3M3', 2)
+VALUES (296329, 3051576050, '2025-11-04', 'W4S3M3', 2)
  ;
 
 INSERT INTO User (
@@ -280,7 +279,7 @@ INSERT INTO Card_All (
 	zip,
 	user_id
 )
-VALUES (604705, 4875218697, 1205, 'K1C2R9', 3)
+VALUES (604705, 4875218697, '2026-11-05', 'K1C2R9', 3)
  ;
 
 INSERT INTO User (
@@ -326,7 +325,7 @@ INSERT INTO Card_All (
 	zip,
 	user_id
 )
-VALUES (250295, 7462654342, 1666, 'C5N6K0', 4)
+VALUES (250295, 7462654342, '2026-03-05', 'C5N6K0', 4)
  ;
 
 INSERT INTO User (
@@ -379,7 +378,7 @@ INSERT INTO Card_All (
 	zip,
 	user_id
 )
-VALUES (800898, 9896344789, 1135, 'D7Q8H5', 5)
+VALUES (800898, 9896344789, '2026-03-05', 'D7Q8H5', 5)
  ;
 
 INSERT INTO User (
@@ -432,7 +431,7 @@ INSERT INTO Card_All (
 	zip,
 	user_id
 )
-VALUES (712201, 1265811323, 1637, 'C8E4E9', 6)
+VALUES (712201, 1265811323, '2026-03-05', 'C8E4E9', 6)
  ;
 
 INSERT INTO User (
@@ -478,7 +477,7 @@ INSERT INTO Card_All (
 	zip,
 	user_id
 )
-VALUES (910781, 0237024738, 2488, 'V7J9T2', 7)
+VALUES (910781, 0237024738, '2026-03-05', 'V7J9T2', 7)
  ;
 
 INSERT INTO User (
@@ -524,7 +523,7 @@ INSERT INTO Card_All (
 	zip,
 	user_id
 )
-VALUES (998279, 7561886199, 2047, 'I3I0J3', 8)
+VALUES (998279, 7561886199, '2026-03-05', 'I3I0J3', 8)
  ;
 
 INSERT INTO User (
@@ -570,7 +569,7 @@ INSERT INTO Card_All (
 	zip,
 	user_id
 )
-VALUES (526470, 0417641377, 2903, 'O2D6I5', 9)
+VALUES (526470, 0417641377, '2026-03-05', 'O2D6I5', 9)
  ;
 
 INSERT INTO User (
@@ -623,7 +622,7 @@ INSERT INTO Card_All (
 	zip,
 	user_id
 )
-VALUES (993201, 5250954047, 4774, 'P4P8E9', 10)
+VALUES (993201, 5250954047, '2026-03-05', 'P4P8E9', 10)
  ;
 
 INSERT INTO User (
@@ -676,7 +675,7 @@ INSERT INTO Card_All (
 	zip,
 	user_id
 )
-VALUES (687246, 5572465350, 4937, 'O7U1A7', 11)
+VALUES (687246, 5572465350, '2026-03-05', 'O7U1A7', 11)
  ;
 
 INSERT INTO User (
@@ -729,7 +728,7 @@ INSERT INTO Card_All (
 	zip,
 	user_id
 )
-VALUES (536012, 6666091141, 1356, 'E3P8A0', 12)
+VALUES (536012, 6666091141, '2026-03-05', 'E3P8A0', 12)
  ;
 
 INSERT INTO User (
@@ -775,7 +774,7 @@ INSERT INTO Card_All (
 	zip,
 	user_id
 )
-VALUES (410228, 4412450243, 3192, 'P9E0R5', 13)
+VALUES (410228, 4412450243, '2026-03-05', 'P9E0R5', 13)
  ;
 
 INSERT INTO User (
@@ -821,7 +820,7 @@ INSERT INTO Card_All (
 	zip,
 	user_id
 )
-VALUES (582043, 1712737336, 4827, 'A2F7V9', 14)
+VALUES (582043, 1712737336, '2026-03-05', 'A2F7V9', 14)
  ;
 
 INSERT INTO User (
@@ -867,7 +866,7 @@ INSERT INTO Card_All (
 	zip,
 	user_id
 )
-VALUES (681374, 7701728982, 1062, 'H4V3B3', 15)
+VALUES (681374, 7701728982, '2026-03-05', 'H4V3B3', 15)
  ;
 
 INSERT INTO User (
@@ -920,7 +919,7 @@ INSERT INTO Card_All (
 	zip,
 	user_id
 )
-VALUES (218792, 4819326594, 1202, 'I4K3H7', 16)
+VALUES (218792, 4819326594, '2026-03-05', 'I4K3H7', 16)
  ;
 
 INSERT INTO User (
@@ -966,7 +965,7 @@ INSERT INTO Card_All (
 	zip,
 	user_id
 )
-VALUES (951704, 3949434741, 4461, 'F1R6S6', 17)
+VALUES (951704, 3949434741, '2026-03-05', 'F1R6S6', 17)
  ;
 
 INSERT INTO User (
@@ -1012,7 +1011,7 @@ INSERT INTO Card_All (
 	zip,
 	user_id
 )
-VALUES (632889, 3130124818, 2622, 'V7D6Y9', 18)
+VALUES (632889, 3130124818, '2026-03-05', 'V7D6Y9', 18)
  ;
 
 INSERT INTO User (
@@ -1058,7 +1057,7 @@ INSERT INTO Card_All (
 	zip,
 	user_id
 )
-VALUES (921704, 4547836357, 4859, 'S8I5K6', 19)
+VALUES (921704, 4547836357, '2026-03-05', 'S8I5K6', 19)
  ;
 
 INSERT INTO User (
@@ -1104,7 +1103,7 @@ INSERT INTO Card_All (
 	zip,
 	user_id
 )
-VALUES (369578, 5606524657, 3370, 'C4D9C2', 20)
+VALUES (369578, 5606524657, '2026-03-05', 'C4D9C2', 20)
  ;
 
 INSERT INTO Speeder (

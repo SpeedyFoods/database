@@ -1,9 +1,17 @@
 import mysql.connector
 
+local = True
+if local:
+    host = "localhost"
+    user = "root"
+else:
+    host = "database-1.crb52cpzkqln.us-west-1.rds.amazonaws.com"
+    user = "admin"
+
 db = mysql.connector.connect(
-    host="database-1.crb52cpzkqln.us-west-1.rds.amazonaws.com",
+    host=host,
     passwd="speedyfoods321",
-    user="admin",
+    user=user,
     database="testdatabase"
 )
 
