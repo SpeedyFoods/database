@@ -17,20 +17,19 @@ def insert_row(query_name, insert_query, insert_tuple):
     """
     Inserts the values into the table then returns the id/primary key of the last inserted row
     """
-    try:
-        cursor.execute(insert_query, insert_tuple)
-        print(f"{query_name} inserted successfully")
-        db.commit()
-        return cursor.lastrowid
-    except Exception as e:
-        print(e)
-        print(f"failed to insert to table {query_name}")
+    cursor.execute(insert_query, insert_tuple) # CAN THROW ERROR!
+    print(f"{query_name} inserted successfully")
+    db.commit()
+    return cursor.lastrowid
+
+# ---------------FORM HANDLERS---------------
+# All form handlers return human readable messages, which notify of failure or success of form submission,
+# and potentially a programmer readable message for debugging.
 
 def register_user(user_detail):
     # we should do data validation. right now im able to insert multiple users with the same info. Myabe change some values to UNIQUE?
-    res = {}
-    res['success'] = False
-    res['error'] = "no errors"
+    
+    out = {'msg': "Registered user successfully", 'error': ""}
     
     # removing whitespace from zip and cardnumber
     user_detail['zip'] = user_detail['zip'].replace(' ', '')
@@ -66,21 +65,16 @@ def register_user(user_detail):
         insert_row("Card_All", insert_card_all_query, (card_number_6,
             card_number_rest, user_detail['expiration_date'],
             user_detail['zip'], user_id))
-
-        res['success'] = True
-        return res
-
-    # i think there is a better way to catch error messages
+    
     except Exception as e:
-        res['error'] = "Failed to insert user data" + str(e)
-        print("Failed to insert user data")
         print(e)
-        return res
+        out['msg'] = 'Failed to register user'
+        out['error'] = e
+    
+    return out
 
 def register_restaurant(restaurant_detail):
-    res = {}
-    res['success'] = False
-    res['error'] = "no errors"
+    out = {'msg': "Regiestered restaurant successfully", 'error': ""}
     try:
         # discuss: can one manger have multiple 
         manager_id = get_user_id_by_email(restaurant_detail['restaurant_manager_email'])
@@ -88,49 +82,42 @@ def register_restaurant(restaurant_detail):
 
         if (manager_id == None):
             # manager_id = randint(100,500)
-            res['error'] = f"User with email {restaurant_detail['restaurant_manager_email']} does not Exist"
-            res['success'] = False
-            print( f"User with email {restaurant_detail['restaurant_manager_email']} does not Exist")
-            return res
+            out['msg'] = f"User with email {restaurant_detail['restaurant_manager_email']} does not Exist"
+            return out
+        
         if (value_exist_in_column('Restaurant', 'restaurant_id', manager_id)):
-            res['error'] = f"This user is already managing a restaurant"
-            res['success'] = False
-            return res
-
+            out['msg'] = f"This user is already managing a restaurant"
+            return out
+        
         if (not value_exist_in_column('RestaurantParent', 'restaurant_name', restaurant_detail['restaurant_name'])):
             insert_row("Restaurant Parent", insert_restaurant_parent_query,
                     (restaurant_detail['restaurant_name'], restaurant_detail['cuisine']))
 
         insert_row("Restaurant", insert_restaurant_query, (manager_id, restaurant_detail['restaurant_name']))
-        return res
 
     except Exception as e:
-        res['error'] = "Failed to insert user data" + str(e)
-        print("Failed to register user")
         print(e)
-        return res
-
+        out['msg'] = "Failed to register restaurant"
+        out['error'] = e
+    
+    return out
 
 def insert_restaurant_item(register_item_detail):
-    res = {}
-    res['success'] = False
-    res['error'] = "no errors"
+    out = {'msg': "Inserted restaurant item successfully", 'error': ""}
+
     try:
         restaurant_id = get_restaurant_id_by_name(register_item_detail['restaurant_name'])
         insert_row("Item", insert_item_query, (register_item_detail['item_name'], restaurant_id, register_item_detail['price']))
     except Exception as e:
-        res['error'] = "Failed to insert user data" + str(e)
-        print("Failed to insert restaurant item")
+        out['msg'] = "Failed to insert restaurant item"
+        out['error'] = e
         print(e)
-        return res
-    return res
+    
+    return out
 
 
-# def get_order_id_
 def place_order(order_detail):
-    res = {}
-    res['success'] = False
-    res['error'] = "no errors"
+    out = {'msg': "Placed order successfully", 'error': ""}
     try:
         consumer_id = get_user_id_by_email(order_detail['consumer_email'])
         restaurant_id = get_restaurant_id_by_name(order_detail['restaurant_name'])
@@ -142,10 +129,11 @@ def place_order(order_detail):
         insert_row("Order to Item", insert_order_to_item_query,
                     (order_id, restaurant_id, order_detail['item_name']))
     except Exception as e:
-        res['error'] = "Failed to insert user data" + str(e)
-        print("Failed to place order" + str(e))
+        out['msg'] = "Failed to place order"
+        out['error'] = e
         print(e)
-        return res
+    
+    return out
 
 def rate_restaurant(user_detail):
 

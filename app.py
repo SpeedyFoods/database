@@ -72,12 +72,12 @@ def form_order():
   # },
 @app.route('/user_sign_up', methods=['GET','POST'])
 def route_register_user():
-    data =request.form.to_dict(flat=True)
-    try:
-      result = register_user(data)
-      return result
-    except Exception as e:
-      print(e)
+    data = request.form.to_dict(flat=True)
+    out = register_user(data)
+    return render_template(
+        'form_confirmation.html',
+        form_confirmation = out
+    )
 
 # EXPECTED VALUES FROM THE FORM
 # "restaurant_manager_email": { "type": "string" },
@@ -85,13 +85,12 @@ def route_register_user():
 # "cuisine": { "type": "string" },
 @app.route('/register_restaurant', methods=['GET','POST'])
 def route_register_restaurant():
-    data =request.form.to_dict(flat=True)
-    print(data)
-    res = register_restaurant(data)
-    if not res['success']:
-      return res['error']
-    return 'success'
-  
+    data = request.form.to_dict(flat=True)
+    out = register_restaurant(data)
+    return render_template(
+        'form_confirmation.html',
+        form_confirmation = out
+    )
 
 # EXPECTED VALUES FROM THE FORM
 # "item_name": { "type": "string" },
@@ -99,9 +98,12 @@ def route_register_restaurant():
 # "price": { "type": "number" },
 @app.route('/insert_restaurant_item', methods=['POST'])
 def route_restaurant_item():
-    data =request.form.to_dict(flat=True)
-    insert_restaurant_item(data)
-    return "Success"
+    data = request.form.to_dict(flat=True)
+    out = insert_restaurant_item(data)
+    return render_template(
+        'form_confirmation.html',
+        form_confirmation = out
+    )
 
 # EXPECTED VALUES FROM THE FORM
 # "tip": { "type": "string" },
@@ -112,17 +114,19 @@ def route_restaurant_item():
 # "item_name": { "type": "string" },
 @app.route('/place_order', methods=['POST'])
 def route_place_order():
-    data =request.form.to_dict(flat=True)
-    place_order(data)
-    return data
-
-
-# EXPECTED VALUES FROM THE FORM
-@app.route('/rate_restaurant', methods=['POST'])
-def route_rate_restaurant():
     data = request.form.to_dict(flat=True)
-    rate_restaurant(data)
-    return data
+    out = place_order(data)
+    return render_template(
+        'form_confirmation.html',
+        form_confirmation = out
+    )
+
+# # EXPECTED VALUES FROM THE FORM
+# @app.route('/rate_restaurant', methods=['POST'])
+# def route_rate_restaurant():
+#     data = request.form.to_dict(flat=True)
+#     rate_restaurant(data)
+#     return data
 
 # -------------------VIEW-------------
 # discussion
