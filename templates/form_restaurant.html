@@ -4,15 +4,15 @@
 <form action="/register_restaurant" method="post">
   <div>
     <label for="restaurant_name">Restaurant Name</label><br>
-    <input type="text" id="restaurant_name" name="restaurant_name" value="">
+    <input type="text" id="restaurant_name" name="restaurant_name" value="" required>
   </div>
   <div>
     <label for="restaurant_manager_email">Manager email (must already be a user)</label><br>
-    <input type="text" id="restaurant_manager_email" name="restaurant_manager_email" value="">
+    <input type="text" id="restaurant_manager_email" name="restaurant_manager_email" value="" required>
   </div>
   <div>
     <label for="cuisine">Cuisine</label><br>
-    <input type="text" id="cuisine" name="cuisine" value="">
+    <input type="text" id="cuisine" name="cuisine" value="" required>
   </div>
   <input type="submit" value="Register Restaurant">
 </form>
