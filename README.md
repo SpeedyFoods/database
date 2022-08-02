@@ -1,6 +1,6 @@
 # Submission Checklist:
 - [ ] make repository public
-- [ ] paste git hash here
+- [ ] paste git hash here **9a48869719fb95c7d2a1c5f815cd18a58a7841f4**
 - [ ] submit link to canvas and verify that it is accessible publicly 
 
 # Speedy Foods Database
@@ -61,11 +61,6 @@ database credentials.
 run: 
 ``` bash
 pip3 install -r requirements.txt
-```
-
-then create the tables and insert rows by running:
-``` bash
-pip3 create_all_tables_and_data.py
 ```
 
 
