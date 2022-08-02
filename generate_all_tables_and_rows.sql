@@ -1,4 +1,4 @@
-DROP DATABASE testdatabase;
+-- DROP DATABASE testdatabase;
 CREATE DATABASE testdatabase;
 use testdatabase;
 
