@@ -7,6 +7,7 @@ from db_client import db, cursor
 from queries.insert_queries import *
 from queries.division_query import view_users_ordered_from_every_restaurant_query
 from queries.aggregate import *
+from queries.nested_aggregation_with_group_by import *
 from queries.update import *
 from queries.delete import *
 from utils.helper import get_random_speeder_id_from_db, get_restaurant_id_by_name, get_user_id_by_email, split_card_number, value_exist_in_column
@@ -201,6 +202,10 @@ def view_users_ordered_from_every_restaurant():
 
 def aggregate_query():
     cursor.execute(select_average_price_of_all_items)
+    return table_from_cursor(cursor)
+
+def cheapest_item_every_query():
+    cursor.execute(cheapest_item_every)
     return table_from_cursor(cursor)
     
 def update_user_email(data):
