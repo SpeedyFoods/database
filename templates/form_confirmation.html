@@ -1,9 +1,0 @@
-{% extends "common.html" %}
-{% block inside %}
-<h3>Status</h3>
-{{form_confirmation.msg}}
-{% if form_confirmation.error != "" %}
-  <h3>Details</h3>
-  <code class="code">{{form_confirmation.error}}</code>
-{% endif %}
-{% endblock %}

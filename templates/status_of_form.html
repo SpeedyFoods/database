@@ -1,0 +1,9 @@
+{% extends "common.html" %}
+{% block inside %}
+<h3>Status</h3>
+{{out.msg}}
+{% if out.error != "" %}
+  <h3>Details</h3>
+  <code class="code">{{out.error}}</code>
+{% endif %}
+{% endblock %}

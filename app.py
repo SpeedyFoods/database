@@ -75,8 +75,8 @@ def route_register_user():
     data = request.form.to_dict(flat=True)
     out = register_user(data)
     return render_template(
-        'form_confirmation.html',
-        form_confirmation = out
+        'status_of_form.html',
+        out = out
     )
 
 # EXPECTED VALUES FROM THE FORM
@@ -88,8 +88,8 @@ def route_register_restaurant():
     data = request.form.to_dict(flat=True)
     out = register_restaurant(data)
     return render_template(
-        'form_confirmation.html',
-        form_confirmation = out
+        'status_of_form.html',
+        out = out
     )
 
 # EXPECTED VALUES FROM THE FORM
@@ -101,8 +101,8 @@ def route_restaurant_item():
     data = request.form.to_dict(flat=True)
     out = insert_restaurant_item(data)
     return render_template(
-        'form_confirmation.html',
-        form_confirmation = out
+        'status_of_form.html',
+        out = out
     )
 
 # EXPECTED VALUES FROM THE FORM
@@ -117,8 +117,8 @@ def route_place_order():
     data = request.form.to_dict(flat=True)
     out = place_order(data)
     return render_template(
-        'form_confirmation.html',
-        form_confirmation = out
+        'status_of_form.html',
+        out = out
     )
 
 # # EXPECTED VALUES FROM THE FORM
