@@ -49,28 +49,22 @@ Overall we kept the original schema form. Our improvements led to creating even 
 
 
 
-# Create all tables and insert all Data from SQL Script
+# Create all tables and insert all Data from an SQL Script
 
-copy the script inside `generate_all_tables_and_rows.sql` and run it.
+Copy the contents of `generate_all_tables_and_rows.sql` into MySQLWorkbench, then run the script.
 
 
 # Setting Up DataBase:
-First, you must have a sql database running. Create a database named `testdatabase` then edit the `db_client.py` with your
+First, you must have a MySQL database running. Edit the `db_client.py` with your
 database credentials. 
 
-run: 
-``` bash
-pip3 install -r requirements.txt
-```
 
-
-# Running our Application Server:
-1. Install Python Dependency Packages:
+# Running our Application Server (Flask) through the command line:
+1. Install Python Dependencies:
 mac:
 ``` bash
 pip3 install -r requirements.txt
 ```
-
 
 windows:
 ``` bash
@@ -80,7 +74,6 @@ pip install -r requirements.txt
 2. Run the Server!
 ``` bash
 $ export FLASK_APP=app.py
-$ export FLASK_ENV=development
 $ flask run
 ```
 
@@ -92,21 +85,11 @@ $ flask run
 ### `/handlers.py`
 `/handlers.py` contains the functions that handle the API endpoints.  All the logic for data insertions exist here.
 
-### `/insert_random_data_script.py`
-This file automatically 
+###`/db_client.py`
+`/db_client.py` is where the Flask framework initializes the `cursor` object that is used to manipulate the database. You would provide database credentials here, allowing Flask to connect to the database.
 
 ### `/queries/*`
 this folder contains queries table creation and insertion queries. Selection queries are handled in `handlers.py`
 
-# Endpoint Documentation
-
-### /user_sign_up
-
-### /place_order
-
-### /insert_item
-### /register_restaurant
-
-### /rate_restaurant
-
-### /reset_database
+### `/templates/*`
+this folder contains Jinja templates. The templates turn into HTML and CSS, creating the user interface.
