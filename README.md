@@ -1,6 +1,6 @@
 # Submission Checklist:
 - [ ] make repository public
-- [ ] paste git hash here **9a48869719fb95c7d2a1c5f815cd18a58a7841f4**
+- [ ] paste git hash here **75ae6e899ddc1289ac208639e65221362bb1db20**
 - [ ] submit link to canvas and verify that it is accessible publicly 
 
 # Speedy Foods Database
