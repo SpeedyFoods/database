@@ -5,7 +5,11 @@ application to run the python flask server
 from flask import Flask, render_template
 from flask import request
 from utils.create_tables import create_tables
-from handlers import aggregate_query, delete_user_by_id, insert_restaurant_item, register_user, register_restaurant, place_order, rate_restaurant, update_user_email, view_orders, view_restaurant_items, view_restaurants, view_users, view_users_ordered_from_every_restaurant
+from handlers import (
+    cheapest_item_every_query, aggregate_query, delete_user_by_id, insert_restaurant_item, register_user, register_restaurant, 
+    place_order, rate_restaurant, update_user_email, view_orders, view_restaurant_items, view_restaurants, 
+    view_users, view_users_ordered_from_every_restaurant
+)
 
 from utils.fake_values import bank_names
 
@@ -185,6 +189,15 @@ def route_aggregate():
         'table_view.html',
         data=data,
         title="View Average Price of all Items"
+    )
+
+@app.route('/view_cheapest_item_every', methods=['GET'])
+def route_cheapest_item_every():
+    data = cheapest_item_every_query()
+    return render_template(
+        'table_view.html',
+        data=data,
+        title="View Cheapest Item in every Restaurant"
     )
 
 @app.route('/update_user_email', methods=['POST'])

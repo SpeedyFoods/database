@@ -1,4 +1,4 @@
-min_priced_item_for_each_restaurant = """
+cheapest_item_every = """
 SELECT restaurant_name, MIN(price)
 FROM Item, Restaurant
 WHERE restaurant_name IN 
