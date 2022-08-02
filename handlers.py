@@ -51,8 +51,9 @@ def register_user(user_detail):
         if (not value_exist_in_column("Zip", 'zip', user_detail['zip'])):
             insert_row("Zip", insert_zip_query, (user_detail['zip'], user_detail['city']))
 
+        unit_number = user_detail["unit_number"] or None # insert NULL value into DB if unit_number was left blank
         insert_row("Address", insert_user_address_query, (user_id, user_detail['zip'], user_detail['building_number'],
-            user_detail['unit_number'], user_detail['street_name']))
+            unit_number, user_detail['street_name']))
 
         # remember to validate cardnumber has 16 digits
         [card_number_6,card_number_rest] = split_card_number(user_detail['card_number'])

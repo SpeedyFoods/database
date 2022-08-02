@@ -49,7 +49,7 @@ def form_order():
             'form_order.html',
             title="Place Order"
         )
-# ------------------------------------ #
+# -------------FORM CONFIRMATION--------------- #
  
 # EXPECTED VALUES FROM THE FORM
   # "properties": {
@@ -124,6 +124,7 @@ def route_rate_restaurant():
     rate_restaurant(data)
     return data
 
+# -------------------VIEW-------------
 # discussion
 @app.route('/view_users', methods=['GET'])
 def route_view_users():
